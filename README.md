@@ -14,23 +14,10 @@ The plugin supports single, variable, and grouped products. It also provides ext
 
 - **New!** Variable price loading delay admin option (default 1s, adjustable for heavier sites).
 - **New!** Add to cart button inside total price section for fixed positions (e.g., bottom right fixed).
-- Floating options for displaying total price.
-- Easy design customization options.
 - Supports Single, Variable, and Grouped products.
-- Total price label and background color customization.
-- WooCommerce High-Performance Order Storage (HPOS) enabled.
-- Calculates and displays the total price based on the quantity selected.
 - Supports dynamic pricing and currency formatting.
 - 8 different positions to display the total price.
 - User-friendly and easy to install.
-
-## Benefits
-
-- **Increased sales:** Customers are more likely to complete purchases when they can see the total cost upfront.
-- **Better customer satisfaction:** Transparent pricing helps customers make informed decisions.
-- **Improved checkout process:** Clearly displayed total pricing reduces friction in the buying process.
-- **Increased trust:** Accurate, up-to-date pricing information fosters customer confidence.
-- **Time-saving:** Eliminates the need for manual price calculations—everything is automated.
 
 ## Installation
 
