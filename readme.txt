@@ -2,11 +2,11 @@
 Contributors: aikya, smshahriar, webfixlab
 Tags: woocommerce product total, single product total, product total
 Requires at least: 4.9
-Tested up to: 6.6.1
-Stable tag: 2.2.2
+Tested up to: 6.7.2
+Stable tag: 2.3.1
 Requires PHP: 7.0
 WC requires at least: 3.6
-WC tested up to: 9.2.2
+WC tested up to: 9.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,21 +18,23 @@ Enhance your product page by displaying the total product price based on the qua
 
 With our plugin, you can easily calculate and display the total price of a product on the single product page. This will help your customers to quickly understand the cost of the product they're interested in, based on the quantity they need.
 
-The best part? No complicated features or slow page speeds here! Get ready for a streamlined and seamless shopping experience.
+The plugin supports single, variable, and grouped products. It also offers extensive styling options to match your store’s design. For heavier sites, you can adjust the variable price loading delay, with a default of 1 second but customizable up to 4 seconds. Additionally, an add-to-cart button can be placed in fixed positions, such as the bottom right of the page, for improved usability.
 
 [Demo](http://demo.webfixlab.com/product/flame-steak/) | [Bug Report](https://wordpress.org/support/plugin/single-product-total/)
 
 **FEATURES**
 
-* New! Floating options for displaying total price.
-* New! Easy design changes.
-* Variable and Grouped product support.
-* Total price label and background color changing options.
-* WooCommerce High-Performance Order Storage (HPOS) enabled
-* Calculate and display the total price based on the quantity selected
-* Dynamic pricing and currency formatting supported
-* 8 different positions to display total price
-* User-friendly and Easy to install
+* New! Variable price loading delay admin option (default 1s, adjustable for heavier sites).
+* New! Add to cart button inside total price section for fixed positions (e.g., bottom right fixed).
+* Floating options for displaying total price.
+* Easy design customization options.
+* Supports Single, Variable, and Grouped products.
+* Total price label and background color customization.
+* WooCommerce High-Performance Order Storage (HPOS) enabled.
+* Calculate and display the total price based on the quantity selected.
+* Dynamic pricing and currency formatting supported.
+* 8 different positions to display total price.
+* User-friendly and easy to install.
 
 **BENEFITS**
 
