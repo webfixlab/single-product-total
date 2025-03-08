@@ -1,23 +1,17 @@
 .sptotal {
-	margin: 0 0 20px 0;
-	display: flex;
-	align-items: center;
-}
-.sptotal.sptotal-block{
-	display: block;
+	margin: 10px 0 20px 0;
 }
 .sptotal label {
-	margin: 0px 25px 0 0;
+	margin: 0px 10px 0 0;
+}
+.sptotal .sptotal-price{
+	display: inline;
+	position: relative;
 }
 .sptotal.sptotal-block label {
 	display: block;
 	border-bottom: 1px solid #cccccc;
-	margin-right: 0;
-}
-.sptotal-price {
-	display: flex;
-	align-items: center;
-	position: relative;
+	margin: 0;
 }
 .sptotal .sptotal-disable .currency, .sptotal .sptotal-disable .total-price{
 	opacity: 0.3;
@@ -81,15 +75,12 @@
 .sptotal-disable .sptotal-loading {
 	position: absolute;
 	left: 10px;
+	bottom: 0;
 }
 
 
 
 @media screen and (max-width: 767px) {
-	.sptotal label {
-		margin: 0;
-		padding-right: 10px;
-	}
 	.sptotal.sptotal-block label{
 		padding-right: 0;
 	}

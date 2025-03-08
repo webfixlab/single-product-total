@@ -119,13 +119,13 @@ if ( ! class_exists( 'SPTotalSettings' ) ) {
 							</td>
 						</tr>
 						<tr>
-							<th><?php echo esc_html__( 'Label display', 'single-product-total' ); ?></th>
+							<th><?php echo esc_html__( 'Price display', 'single-product-total' ); ?></th>
 							<td class="forminp forminp-checkbox">
 								<fieldset>
 									<label>
 										<?php $block = get_option( 'spline_if_inline' ); ?>
 										<input type="checkbox" name="spline_if_inline" value="on" <?php echo 'on' === $block ? 'checked' : ''; ?>>
-										<?php echo esc_html__( 'Block (label at the top)', 'single-product-total' ); ?>
+										<?php echo esc_html__( 'In separate lines', 'single-product-total' ); ?>
 									</label>
 								</fieldset>
 							</td>
@@ -137,7 +137,7 @@ if ( ! class_exists( 'SPTotalSettings' ) ) {
 							</td>
 						</tr>
 						<tr>
-							<th><?php echo esc_html__( 'Text align', 'single-product-total' ); ?></th>
+							<th><?php echo esc_html__( 'Align items', 'single-product-total' ); ?></th>
 							<td>
 								<label><?php $this->render_field( 'sptotal_text_align' ); ?></label>
 							</td>

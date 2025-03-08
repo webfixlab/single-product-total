@@ -1,11 +1,3 @@
-.sptotal-sections .form-table td{
-	padding: 15px 0px;
-	display: flex;
-	align-items: center;
-}
-.sptotal-sections .form-table th{
-	padding: 17px 10px 20px 0;
-}
 .sptotal-wrap .sptotal-heading h1 {
 	font-size: 108%;
 }
@@ -66,59 +58,32 @@ a.nav-tab {
 	display: inline-block;
 	margin-top: 44px;
 }
-.sptotal-sidebar .sidebar_top {
-	background-image: url(../images/banner.svg);
-	background-repeat: no-repeat;
-	background-position: bottom;
-	padding: 20px 20px 20px 20px;
-	background-color: #ffffff;
-	background-size: cover;
+
+.sptotal-sidebar .sidebar_top, .sptotal-sidebar .sidebar_bottom, .sptotal-sidebar .support {
+    padding: 20px;
+    background: #cdcdcd;
+    margin: 0 0 10px;
+    border-radius: 5px;
 }
+
+
+
 .sptotal-sidebar .sidebar_top h1 {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 26px;
-	font-weight: bold;
-	color: #ffffff;
-	padding-bottom: 5px;
-	line-height: 1.2;
+	font-size: 24px;
+    margin: 20px 0 25px;
 }
 .sptotal-sidebar .sidebar_top .tagline_side {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 13.5px;
-	color: #fff;
-	padding-bottom: 30px;
+	font-size: 14px;
+	padding-bottom: 10px;
 }
 .sptotal-sidebar .sidebar_top a {
-	height: 28px;
-	width: 105px;
-	background: #FF8C00;
-	color: #ffffff;
-	border: none;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
-	font-weight: bold;
-	cursor: pointer;
+	background: #2271b1;
 	display: block;
-	text-decoration: none;
-	border-radius: 25px;
-	padding: 10px 20px 0px 20px;
-	margin: auto;
-	margin-bottom: 45px;
-}
-.sptotal-sidebar .sidebar_bottom {
-	background: #ffffff;
-	padding: 20px 20px;
-}
-.sidebar_bottom ul {
-	margin: 0;
-}
-.sidebar_bottom li {
-	margin-bottom: 15px;
-}
-.sptotal-sidebar .support {
-	background: #ffffff;
-	padding: 15px;
-	margin-top: 15px;
+    margin: 15px -19px -20px;
+    padding: 10px 0px 15px 20px;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 @media only screen and (max-width: 960px){
 	.sptotal-wrap .heading-desc{
@@ -144,8 +109,14 @@ a.nav-tab {
 		width: 100%;
 		margin-top: 20px;
 	}
-	.sptotal-sections select, .sptotal-sections input[type="text"]{
-		width: 98% !important;
+	.sptotal-sections label, .sptotal-sections .form-table td fieldset label{
+		display: block;
+		width: 97%;
+	}
+	.sptotal-sections select, .sptotal-sections input[type="text"], .wp-core-ui .sptotal-sections select, .wp-admin .sptotal-sections .form-table select{
+		min-height: 25px;
+		line-height: 25px;
+		padding: 3px 10px;
 	}
 	.sptotal-sidebar{
 		padding-right: 10px;
@@ -159,9 +130,6 @@ a.nav-tab {
 	}
 	.sptotal-sections .form-table th {
 		padding: 10px 0 0 0;
-	}
-	.sptotal-sections .form-table td{
-		padding: 5px 0 0 0;
 	}
 	input.button-primary.sptotal-save {
 		margin: 25px 0 10px 0;

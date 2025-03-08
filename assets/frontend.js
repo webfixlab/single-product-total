@@ -106,7 +106,6 @@
 			setTimeout(
 				function () {
 					const total = self.calculateTotalPrice();
-					console.log( 'total', total );
 					self.$totalPrice.text( self.parsePrice( total, 'front' ) );
 					self.loaderAnimation( self.$priceWrap, 'stop' );
 					self.$working = false;
@@ -162,7 +161,7 @@
 						}
 					}
 				);
-				console.log( 'checkForIssues', total, selected );
+				// console.log( 'checkForIssues', total, selected );
 				if (total !== selected) {
 					issues = true;
 				}

@@ -29,6 +29,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 		 */
 		public function __construct() {
 			$this->settings = array();
+			$this->settings['styles'] = array();
 
 			// get the position of the total price.
 			$this->settings['position'] = get_option( 'sptotal_total_position' );
@@ -83,7 +84,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 				$product = wc_get_product( $post->ID );
 			}
 
-			// skip from external/affiliate products.
+			// skip for external/affiliate products.
 			if ( 'external' === $product->get_type() ) {
 				return;
 			}
@@ -93,51 +94,49 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			}
 
 			$c = $this->get_color();
-
 			if ( false !== strpos( $this->settings['position'], 'fixed' ) ) {
 				$this->settings['position'] .= ' fixed';
 			}
 
-			$html = wp_kses_post(
-				sprintf(
-					'<div class="sptotal %s %s" style="%s">',
-					esc_attr( $this->settings['position'] ),
-					esc_attr( $c['class'] ),
-					isset( $c['background'] ) && ! empty( $c['background'] ) ? esc_html( $c['background'] ) : ''
-				)
-			);
+			?>
+			<div class="sptotal <?php echo esc_attr( $this->settings['position'] ); ?> <?php echo esc_attr( $c['class'] ); ?>" style="<?php echo isset( $c['background'] ) && ! empty( $c['background'] ) ? esc_html( $c['background'] ) : ''; ?>">
+				<?php
+					$this->total_label();
+					$this->total_price();
+					$this->total_cart_button();
+				?>
+			</div>
+			<?php
+		}
 
-			if ( ! empty( $this->settings['label'] ) ) {
-				$html .= wp_kses_post(
-					sprintf(
-						'<label style="%s">%s</label>',
-						isset( $c['label'] ) && ! empty( $c['label'] ) ? esc_html( $c['label'] ) : '',
-						esc_html( $this->settings['label'] )
-					)
-				);
+		public function total_label(){
+			if( empty( $this->settings['label'] ) ){
+				return;
 			}
 
-			$html .= wp_kses_post(
-				sprintf(
-					'<div class="sptotal-price" style="%s">%s</div>',
-					isset( $c['price'] ) && ! empty( $c['price'] ) ? esc_html( $c['price'] ) : '',
-					$this->total_price( $product->get_price() )
-				)
-			);
+			?>
+			<label style="<?php echo esc_html( $this->settings['styles']['label'] ); ?>"><?php echo esc_html( $this->settings['label'] ); ?></label>
+			<?php
+		}
 
-			// add to cart button.
-			if ( 'on' === $this->settings['cart_btn'] ) {
-				$html .= wp_kses_post(
-					sprintf(
-						'<div class="sptotal-cart-btn">%s</div>',
-						esc_html( $this->settings['cart_btn_txt'] )
-					)
-				);
+		public function total_price(){
+			global $product;
+
+			?>
+			<div class="sptotal-price" style="<?php echo esc_html( $this->settings['styles']['price'] ); ?>">
+				<?php $this->display_price( $product->get_price() ); ?>
+			</div>
+			<?php
+		}
+
+		public function total_cart_button(){
+			if ( false === strpos( $this->settings['position'], 'fixed' ) || 'on' !== $this->settings['cart_btn'] ) {
+				return;
 			}
 
-			$html .= '</div>';
-
-			echo wp_kses_post( $html );
+			?>
+			<div class="sptotal-cart-btn"><?php echo esc_html( $this->settings['cart_btn_txt'] ); ?></div>
+			<?php
 		}
 
 		/**
@@ -145,7 +144,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 		 *
 		 * @param string $price product price.
 		 */
-		public function total_price( $price ) {
+		public function display_price( $price ) {
 			$price = number_format(
 				$price,
 				wc_get_price_decimals(),
@@ -153,27 +152,38 @@ if ( ! class_exists( 'SPTotal' ) ) {
 				wc_get_price_thousand_separator()
 			);
 
-			$pos  = get_option( 'woocommerce_currency_pos' ) ?? 'left_space';
-			$html = sprintf( '<span class="total-price">%s</span>', esc_attr( $price ) );
+			$pos = get_option( 'woocommerce_currency_pos' ) ?? 'left_space';
+			$this->log('wc cur pos ' . $pos);
 
-			$currency = 'right_space' ? '&nbsp;%s' : '%s';
-			$currency = 'left_space' ? '%s&nbsp;' : $currency;
-			$currency = '<span class="currency">' . $currency . '</span>';
-
-			if ( 'right' === $pos || 'right_space' === $pos ) {
-				$html = $html . $currency;
-			} else {
-				$html = $currency . $html;
+			?>
+			<bdi>
+				<?php if( 'left' === $pos || 'left_space' === $pos ) : ?>
+					<span class="currency">
+						<?php echo get_woocommerce_currency_symbol(); ?>
+						<?php echo 'left_space' === $pos ? '&nbsp;' : ''; ?>
+					</span>
+				<?php endif; ?>
+				<span class="total-price"><?php echo esc_attr( $price ); ?></span>
+				<?php if( 'right' === $pos || 'right_space' === $pos ) : ?>
+					<span class="currency">
+						<?php echo 'left_space' === $pos ? '&nbsp;' : ''; ?>
+						<?php echo get_woocommerce_currency_symbol(); ?>
+					</span>
+				<?php endif; ?>
+			</bdi>
+			<?php
+		}
+		public function display_currency( $pos ){
+			// 
+		}
+		private function log( $data ) {
+			if ( true === WP_DEBUG ) {
+				if ( is_array( $data ) || is_object( $data ) ) {
+					error_log( print_r( $data, true ) );
+				} else {
+					error_log( $data );
+				}
 			}
-
-			$html = '<bdi>' . $html . '</bdi>';
-
-			return wp_kses_post(
-				sprintf(
-					$html,
-					get_woocommerce_currency_symbol()
-				)
-			);
 		}
 
 		/**
@@ -203,6 +213,8 @@ if ( ! class_exists( 'SPTotal' ) ) {
 
 			$d['class']      .= ! empty( $bg ) ? ' has-color' : '';
 			$d['background'] .= ! empty( $ta ) ? 'text-align: ' . esc_attr( $ta ) . ';' : '';
+
+			$this->settings['styles'] = $d;
 
 			return $d;
 		}

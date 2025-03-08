@@ -12,8 +12,8 @@ The plugin supports single, variable, and grouped products. It also provides ext
 
 ## Features
 
-- **New!** Variable price loading delay admin option (default 1s, adjustable for heavier sites).
-- **New!** Add to cart button inside total price section for fixed positions (e.g., bottom right fixed).
+- Variable price loading delay admin option (default 1s, adjustable for heavier sites).
+- Add to cart button inside total price section for fixed positions (e.g., bottom right fixed).
 - Supports Single, Variable, and Grouped products.
 - Supports dynamic pricing and currency formatting.
 - 8 different positions to display the total price.
@@ -29,7 +29,7 @@ The plugin supports single, variable, and grouped products. It also provides ext
 
 ## Usage
 
-1. Navigate to **WooCommerce > Settings > Single Product Total**.
+1. Navigate to **Sidebar Menu > Product Total**.
 2. Customize the display options, pricing settings, and delay adjustments.
 3. Save the changes, and the total price will be displayed on the product page.
 
