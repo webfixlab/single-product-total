@@ -8,12 +8,11 @@
  */
 
 if ( ! class_exists( 'SPTotal' ) ) {
+
 	/**
 	 * Plugin frotend class
 	 */
 	class SPTotal {
-
-
 
 		/**
 		 * Single product total settings data
@@ -21,8 +20,6 @@ if ( ! class_exists( 'SPTotal' ) ) {
 		 * @var array.
 		 */
 		private $settings;
-
-
 
 		/**
 		 * Frontend total price constructor
@@ -97,7 +94,6 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			if ( false !== strpos( $this->settings['position'], 'fixed' ) ) {
 				$this->settings['position'] .= ' fixed';
 			}
-
 			?>
 			<div class="sptotal <?php echo esc_attr( $this->settings['position'] ); ?> <?php echo esc_attr( $c['class'] ); ?>" style="<?php echo isset( $c['background'] ) && ! empty( $c['background'] ) ? esc_html( $c['background'] ) : ''; ?>">
 				<?php
@@ -113,7 +109,6 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			if( empty( $this->settings['label'] ) ){
 				return;
 			}
-
 			?>
 			<label style="<?php echo esc_html( $this->settings['styles']['label'] ); ?>"><?php echo esc_html( $this->settings['label'] ); ?></label>
 			<?php
@@ -121,7 +116,6 @@ if ( ! class_exists( 'SPTotal' ) ) {
 
 		public function total_price(){
 			global $product;
-
 			?>
 			<div class="sptotal-price" style="<?php echo esc_html( $this->settings['styles']['price'] ); ?>">
 				<?php $this->display_price( $product->get_price() ); ?>
@@ -133,7 +127,6 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			if ( false === strpos( $this->settings['position'], 'fixed' ) || 'on' !== $this->settings['cart_btn'] ) {
 				return;
 			}
-
 			?>
 			<div class="sptotal-cart-btn"><?php echo esc_html( $this->settings['cart_btn_txt'] ); ?></div>
 			<?php
@@ -153,8 +146,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			);
 
 			$pos = get_option( 'woocommerce_currency_pos' ) ?? 'left_space';
-			$this->log('wc cur pos ' . $pos);
-
+			// $this->log('wc cur pos ' . $pos);
 			?>
 			<bdi>
 				<?php if( 'left' === $pos || 'left_space' === $pos ) : ?>
@@ -173,9 +165,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			</bdi>
 			<?php
 		}
-		public function display_currency( $pos ){
-			// 
-		}
+		
 		private function log( $data ) {
 			if ( true === WP_DEBUG ) {
 				if ( is_array( $data ) || is_object( $data ) ) {

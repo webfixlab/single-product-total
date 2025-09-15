@@ -7,13 +7,12 @@
  * @since      2.0
  */
 
-if ( ! class_exists( 'SPTotalLoader' ) ) {
+if ( ! class_exists( 'SPTotal_Loader' ) ) {
+
 	/**
 	 * Single product total admin loader class
 	 */
-	class SPTotalLoader {
-
-
+	class SPTotal_Loader {
 
 		/**
 		 * Plugin init action hook - main entry of the plugin
@@ -25,8 +24,6 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 			add_action( 'init', array( $this, 'do_activate' ) );
 			add_action( 'before_woocommerce_init', array( $this, 'wc_init' ) );
 		}
-
-
 
 		/**
 		 * Plugin activation hook
@@ -55,8 +52,6 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 		 * @return void
 		 */
 		public function do_activate() {
-
-			// check prerequisits.
 			if ( ! $this->should_activate() ) {
 				return;
 			}
@@ -68,7 +63,7 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 			add_filter( 'plugin_action_links_' . plugin_basename( SPTOTAL ), array( $this, 'plugin_action_links' ), 10, 1 );
 			add_filter( 'plugin_row_meta', array( $this, 'plugin_desc_meta' ), 10, 2 );
 
-			include SPTOTAL_PATH . 'includes/class/admin/class-sptotalsettings.php';
+			include SPTOTAL_PATH . 'includes/class/admin/class-sptotal-settings.php';
 			include SPTOTAL_PATH . 'includes/class/class-sptotal.php';
 
 			add_action( 'admin_head', array( $this, 'admin_head' ) );
@@ -112,8 +107,6 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 			$this->client_feedback();
 			return true;
 		}
-
-
 
 		/**
 		 * Admin head hook
@@ -161,8 +154,6 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 		 * @return array
 		 */
 		public function plugin_action_links( $links ) {
-			global $sptotal__;
-
 			$action_links             = array();
 			$action_links['settings'] = '<a href="' . esc_url( admin_url( 'admin.php?page=sptotal-settings' ) ) . '">' . esc_html__( 'Settings', 'single-product-total' ) . '</a>';
 
@@ -348,7 +339,6 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 				esc_url( $sptotal__['plugin']['woo_url'] ),
 				esc_html__( 'WooCommerce', 'single-product-total' )
 			);
-
 			?>
 			<div class="error">
 				<p>
@@ -394,8 +384,6 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 		 * Client feedback notice
 		 */
 		public function client_feedback() {
-			global $sptotal__;
-
 			if ( isset( $_GET['rate_sptotal'] ) && isset( $_GET['nonce'] ) && wp_verify_nonce( sanitize_key( wp_unslash( $_GET['nonce'] ) ), 'sptotal_rate' ) ) {
 				$task = sanitize_key( wp_unslash( $_GET['rate_sptotal'] ) );
 
@@ -434,7 +422,6 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 				esc_url( $sptotal__['plugin']['review_link'] ),
 				esc_html__( 'WordPress.org', 'single-product-total' )
 			);
-
 			?>
 			<div class="notice notice-info is-dismissible">
 				<h3><?php echo esc_html( $sptotal__['plugin']['name'] ); ?></h3>
@@ -489,7 +476,7 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 			// show error/update messages.
 			settings_errors( 'wporg_messages' );
 
-			$settings_class = new SPTotalSettings();
+			$settings_class = new SPTotal_Settings();
 			$settings_class->settings_page();
 		}
 
@@ -521,5 +508,5 @@ if ( ! class_exists( 'SPTotalLoader' ) ) {
 	}
 }
 
-$loader_class = new SPTotalLoader();
+$loader_class = new SPTotal_Loader();
 $loader_class->init();

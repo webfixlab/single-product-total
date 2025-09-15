@@ -2,11 +2,11 @@
 Contributors: aikya, smshahriar, webfixlab
 Tags: woocommerce product total, single product total, product total
 Requires at least: 4.9
-Tested up to: 6.7.2
-Stable tag: 2.3.1
+Tested up to: 6.8.2
+Stable tag: 2.3.2
 Requires PHP: 7.0
 WC requires at least: 3.6
-WC tested up to: 9.7.0
+WC tested up to: 10.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 

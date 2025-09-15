@@ -7,13 +7,12 @@
  * @since      2.0
  */
 
-if ( ! class_exists( 'SPTotalSettings' ) ) {
+if ( ! class_exists( 'SPTotal_Settings' ) ) {
+
 	/**
 	 * Plugin loader main class
 	 */
-	class SPTotalSettings {
-
-
+	class SPTotal_Settings {
 
 		/**
 		 * Plugin init action hook - main entry of the plugin
@@ -237,30 +236,21 @@ if ( ! class_exists( 'SPTotalSettings' ) ) {
 					return;
 				}
 
-				$html  = '';
-				$value = get_option( $name );
-				foreach ( $data['options'] as $v => $label ) {
-					$selected = '';
-					if ( $value === $v ) {
-						$selected = ' selected';
-					}
-
-					$html .= sprintf( '<option value="%s"%s>%s</option>', esc_attr( $v ), $selected, esc_html( $label ) );
-				}
-
-				printf(
-					'<select name="%s">%s</select>',
-					esc_attr( $name ),
-					wp_kses(
-						$html,
-						array(
-							'option' => array(
-								'value'    => array(),
-								'selected' => array(),
-							),
-						)
-					)
-				);
+				$saved = get_option( $name ); // saved value.
+				?>
+				<select name="<?php echo esc_attr( $name ); ?>">
+					<?php
+						foreach( $data['options'] as $value => $label ){
+							printf(
+								'<option value="%s" %s>%s</option>',
+								esc_attr( $value ),
+								$value === $saved ? 'selected' : '',
+								esc_html( $label )
+							);
+						}
+					?>
+				</select>
+				<?php
 			}
 		}
 
@@ -308,5 +298,5 @@ if ( ! class_exists( 'SPTotalSettings' ) ) {
 	}
 }
 
-$settings_class = new SPTotalSettings();
+$settings_class = new SPTotal_Settings();
 $settings_class->init();
