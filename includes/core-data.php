@@ -19,7 +19,7 @@ $sptotal__['plugin'] = array(
 	),
 	'review_link'   => 'https://wordpress.org/support/plugin/single-product-total/reviews/?rate=5#new-post',
 	'free_url'      => 'https://wordpress.org/plugins/single-product-total/',
-	'request_quote' => 'https://webfixlab.com/request-quote/',
+	'contact_us'    => 'https://webfixlab.com/contact-us/',
 	'name'          => __( 'Single Product Total', 'single-pruduct-total' ),
 	'woo_url'       => 'wcurl',
 );

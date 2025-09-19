@@ -176,7 +176,7 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 			}
 
 			$row_meta            = array();
-			$row_meta['apidocs'] = '<a href="' . esc_url( $sptotal__['plugin']['request_quote'] ) . '">' . esc_html__( 'Support', 'single-product-total' ) . '</a>';
+			$row_meta['apidocs'] = '<a href="' . esc_url( $sptotal__['plugin']['contact_us'] ) . '">' . esc_html__( 'Support', 'single-product-total' ) . '</a>';
 
 			return array_merge( $links, $row_meta );
 		}

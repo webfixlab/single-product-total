@@ -110,7 +110,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 				return;
 			}
 			?>
-			<label style="<?php echo esc_html( $this->settings['styles']['label'] ); ?>"><?php echo esc_html( $this->settings['label'] ); ?></label>
+			<span style="<?php echo esc_html( $this->settings['styles']['label'] ); ?>"><?php echo esc_html( $this->settings['label'] ); ?></span>
 			<?php
 		}
 
@@ -164,23 +164,21 @@ if ( ! class_exists( 'SPTotal' ) ) {
 				);
 			}
 
-			$pos = get_option( 'woocommerce_currency_pos' ) ?? 'left_space';
-			// $this->log('wc cur pos ' . $pos);
+			$all_formats = array( // all price formatting options. here 
+				'left'        => '%1$s%2$s',
+				'right'       => '%2$s%1$s',
+				'left_space'  => '%1$s&nbsp;%2$s',
+				'right_space' => '%2$s&nbsp;%1$s',
+			);
+			$pos = get_option( 'woocommerce_currency_pos' ) ?? 'left_space'; // get currency with position settings.
 			?>
 			<bdi>
-				<?php if( 'left' === $pos || 'left_space' === $pos ) : ?>
-					<span class="currency">
-						<?php echo get_woocommerce_currency_symbol(); ?>
-						<?php echo 'left_space' === $pos ? '&nbsp;' : ''; ?>
-					</span>
-				<?php endif; ?>
-				<span class="total-price"><?php echo esc_attr( $price ); ?></span>
-				<?php if( 'right' === $pos || 'right_space' === $pos ) : ?>
-					<span class="currency">
-						<?php echo 'left_space' === $pos ? '&nbsp;' : ''; ?>
-						<?php echo get_woocommerce_currency_symbol(); ?>
-					</span>
-				<?php endif; ?>
+				<?php echo sprintf(
+					// translators: %1$s: currency symbol, %2$s: price html.
+					$all_formats[$pos],
+					get_woocommerce_currency_symbol(),
+					"<span class=\"total-price\">{$price}</span>"
+				); ?>
 			</bdi>
 			<?php
 		}

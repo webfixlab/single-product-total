@@ -15,12 +15,12 @@ global $sptotal__;
 			<?php echo esc_html__( 'Get a customized version of the plugin to perfectly match your unique needs.', 'single-product-total' ); ?>
 		</div>
 		<div>
-			<a href="https://webfixlab.com/request-quote/"><?php echo esc_html__( 'Customize for $99 only.', 'single-product-total' ); ?></a>
+			<a href="<?php echo esc_url( $sptotal__['plugin']['contact_us'] ); ?>"><?php echo esc_html__( 'Customize now! Starts $99 only.', 'single-product-total' ); ?></a>
 		</div>
 	</div>
 	<div class="support">
 		<h3><?php echo esc_html__( 'Dedicated Support Team', 'single-product-total' ); ?></h3>
 		<p><?php echo esc_html__( 'Our support is what makes us No.1. We are available round the clock for any support.', 'single-product-total' ); ?></p>
-		<p><a href="https://webfixlab.com/request-quote/"><?php echo esc_html__( 'Send Request', 'single-product-total' ); ?></a></p>
+		<p><a href="<?php echo esc_url( $sptotal__['plugin']['contact_us'] ); ?>"><?php echo esc_html__( 'Send Request', 'single-product-total' ); ?></a></p>
 	</div>
 </div>

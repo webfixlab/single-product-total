@@ -1,14 +1,14 @@
 .sptotal {
-	margin: 10px 0 20px 0;
+	margin: 14px 0 20px 0;
 }
-.sptotal label {
-	margin: 0px 10px 0 0;
+.sptotal > span {
+	margin: 0px 5px 0 0;
 }
 .sptotal .sptotal-price{
 	display: inline;
 	position: relative;
 }
-.sptotal.sptotal-block label {
+.sptotal.sptotal-block > span {
 	display: block;
 	border-bottom: 1px solid #cccccc;
 	margin: 0;
@@ -17,24 +17,14 @@
 	opacity: 0.3;
 	pointer-events: none;
 }
-.sptotal .currency, .sptotal .total-price {
+.sptotal .sptotal-price {
 	font-weight: 600;
 	font-size: 22px;
 }
 .sptotal.has-color {
 	padding: 10px 20px;
 }
-.sptotal-cart-btn {
-	font-size: 15px;
-	background: #1d2327;
-	color: #ffffff;
-	padding: 3px 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	cursor: pointer;
-}
-
-
+/* Fixed position styles */
 .sptotal.fixed {
 	position: fixed;
 	background: #ffffff;
@@ -43,6 +33,7 @@
 	text-align: center;
 	margin: 0;
 	box-shadow: 0 0 5px rgba(0,0,0,.2);
+	transition: box-shadow 0.3s ease-in, border-radius 0.3s ease-in;
 }
 .sptotal.fixed_bottom_right, .sptotal.fixed_bottom_left{
 	bottom: 12%;
@@ -56,7 +47,6 @@
 .sptotal.fixed_bottom_left, .sptotal.fixed_top_left{
 	left: 0;
 }
-
 .sptotal-loading {
 	width: 34px;
 	height: 34px;
@@ -72,19 +62,35 @@
 		transform: rotate(360deg);
 	}
 }
+.sptotal-cart-btn {
+	font-size: 15px;
+	background: #575757;
+	color: #ffffff;
+	padding: 3px 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	text-align: center;
+	transition: background 0.3s ease-in, border-radius .3s ease-in;
+}
+.sptotal.fixed:hover{
+	box-shadow: 0 0 5px rgba(0,0,0,.5);
+	border-radius: 5px 0 0 5px;
+}
+.sptotal.fixed:hover .sptotal-cart-btn{
+	background: #1a1a1a;
+	border-radius: 5px;
+}
 .sptotal-disable .sptotal-loading {
 	position: absolute;
 	left: 10px;
 	bottom: 0;
 }
-
-
-
 @media screen and (max-width: 767px) {
-	.sptotal.sptotal-block label{
+	.sptotal.sptotal-block span{
 		padding-right: 0;
 	}
-	.sptotal.fixed label, .sptotal.fixed .currency, .sptotal.fixed .total-price{
+	.sptotal.fixed span, .sptotal.fixed .currency, .sptotal.fixed .total-price{
 		font-size: 14px;
 	}
 	.sptotal-cart-btn{
