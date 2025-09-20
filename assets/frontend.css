@@ -1,25 +1,25 @@
 .sptotal {
 	margin: 14px 0 20px 0;
+	position: relative;
 }
 .sptotal > span {
 	margin: 0px 5px 0 0;
 }
 .sptotal .sptotal-price{
 	display: inline;
-	position: relative;
 }
 .sptotal.sptotal-block > span {
 	display: block;
 	border-bottom: 1px solid #cccccc;
 	margin: 0;
 }
-.sptotal .sptotal-disable .currency, .sptotal .sptotal-disable .total-price{
+.sptotal-disable{
 	opacity: 0.3;
 	pointer-events: none;
 }
 .sptotal .sptotal-price {
 	font-weight: 600;
-	font-size: 22px;
+	font-size: 17px;
 }
 .sptotal.has-color {
 	padding: 10px 20px;
@@ -48,8 +48,8 @@
 	left: 0;
 }
 .sptotal-loading {
-	width: 34px;
-	height: 34px;
+	width: 25px;
+	height: 25px;
 	border: 4px transparent solid !important;
 	border-top: 4px #757474 solid !important;
 	border-right: 4px #757474 solid !important;
@@ -75,16 +75,34 @@
 }
 .sptotal.fixed:hover{
 	box-shadow: 0 0 5px rgba(0,0,0,.5);
+}
+.sptotal.fixed_bottom_right:hover, .sptotal.fixed_top_right:hover{
 	border-radius: 5px 0 0 5px;
+}
+.sptotal.fixed_bottom_left:hover, .sptotal.fixed_top_left:hover{
+	border-radius: 0 5px 5px 0;
 }
 .sptotal.fixed:hover .sptotal-cart-btn{
 	background: #1a1a1a;
 	border-radius: 5px;
 }
-.sptotal-disable .sptotal-loading {
+.sptotal-loading {
 	position: absolute;
-	left: 10px;
-	bottom: 0;
+    top: 1px;
+	left: 35px;
+}
+.sptotal-block .sptotal-loading {
+    top: 26px;
+	left: 35px;
+}
+/* .sptotal.fixed_bottom_left.fixed */
+.sptotal.fixed .sptotal-loading {
+    top: 4px;
+	left: 35%;
+}
+.sptotal.sptotal-block.fixed .sptotal-loading {
+    top: 34px;
+	left: 35%;
 }
 @media screen and (max-width: 767px) {
 	.sptotal.sptotal-block span{
