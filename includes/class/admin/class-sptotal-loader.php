@@ -97,7 +97,6 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 			$is_plugin_active = is_plugin_active( $plugin );
 
 			if ( $is_plugin_active && ! $is_wc_active ) {
-				// deactivate plugin.
 				deactivate_plugins( $plugin );
 				add_action( 'admin_notices', array( $this, 'wc_missing_notice' ) );
 

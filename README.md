@@ -10,8 +10,6 @@ This plugin displays total price on WooCommerce product pages. A simple and slee
 
 With new **animation duration option** users can adjust the timing to load total price. This feature is very helpful if you have a product page with lots of plugins installed. Just set a bit high loader time and it will automatically support **WooCommerce Discount Plugins**. Change it according to your site's rquirements.
 
-[Demo](http://demo.webfixlab.com/product/flame-steak/) | [Bug Report](https://wordpress.org/support/plugin/single-product-total/)
-
 ## Features
 
 - **New!** Auto disable total price add to cart button.

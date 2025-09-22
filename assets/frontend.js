@@ -28,7 +28,6 @@
 			this.updateTotal();
 
 			$(document).on('change input', 'form.cart .quantity .qty', function(){
-				console.log('qt changed');
 				if(!self.$working ){
 					self.$working = true;
 					self.updateTotal();
@@ -95,7 +94,6 @@
 				self.$working = false;
 			}, parseInt(sptotal_data.settings.delay));
 
-			// console.log('[updateTotal]');
 			this.cartBtnHandler(disableCart);
 		}
 		calculateTotalPrice(){
@@ -172,15 +170,12 @@
 						selected++;
 					}
 				});
-				// console.log('has issue?', total, selected );
 				if(total !== selected) hasIssue = true;
 			}
 
 			// check if variation add to cart button is enabled or not.
 			const cartBtn = $(document).find('.woocommerce-variation-add-to-cart');
-			// console.log('cart btn', cartBtn);
 			if(cartBtn && cartBtn.hasClass('woocommerce-variation-add-to-cart-disabled')){
-				// console.log('cart btn disabled');
 				return true;
 			}
 			return hasIssue;
@@ -196,7 +191,6 @@
 		loaderAnimation(item, action = 'start'){
 			const key     = 'sptotal';
 			const aniWrap = $(document).find(`.sptotal .${key}-loading`); // animation wrapper.
-			// console.log('[spinner:item]', item);
 			if(action === 'start'){
 				if(!item.hasClass(`${key}-disable`)){
 					item.addClass(`${key}-disable`);
@@ -224,16 +218,10 @@
 			return swatches;
 		}
 
-
-
-
-
 		persistantEventHandler(){
 			const self = this;
 
 			$(document).on('change', '.variations select', function(){
-				// console.log('[select:changed]');
-				// console.log('[select:changed]', $(this).attr('name'));
 				if($(this).find('option:selected').val().length === 0){
 					self.resetTotal();
 					self.cartBtnHandler(true);
@@ -242,7 +230,6 @@
 				}
 			});
 			$(document).on('click', 'a.reset_variations', function(){
-				// console.log('[reset:clicked]');
 				self.resetTotal();
 				self.cartBtnHandler(true);
 			});
@@ -255,7 +242,6 @@
 			if(!totalCartBtn) return;
 
 			if(override && !totalCartBtn.hasClass('sptotal-disable')){
-				// console.log('[override:cart - disable]');
 				totalCartBtn.addClass('sptotal-disable');
 			}
 			if(override) return;
@@ -263,7 +249,6 @@
 			setTimeout(function(){
 				const cartBtn   = $(document).find('.woocommerce-variation-add-to-cart');
 				const isDisable = cartBtn && cartBtn.hasClass('woocommerce-variation-add-to-cart-disabled');
-				// console.log('cart btn disable?', isDisable);
 				if(isDisable && !totalCartBtn.hasClass('sptotal-disable')) totalCartBtn.addClass('sptotal-disable');
 				else totalCartBtn.removeClass('sptotal-disable');
 			}, sptotal_data.settings.delay);

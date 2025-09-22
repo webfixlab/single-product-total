@@ -58,16 +58,12 @@ a.nav-tab {
 	display: inline-block;
 	margin-top: 44px;
 }
-
 .sptotal-sidebar .sidebar_top, .sptotal-sidebar .sidebar_bottom, .sptotal-sidebar .support {
     padding: 20px;
     background: #cdcdcd;
     margin: 0 0 10px;
     border-radius: 5px;
 }
-
-
-
 .sptotal-sidebar .sidebar_top h1 {
 	font-size: 24px;
     margin: 20px 0 25px;

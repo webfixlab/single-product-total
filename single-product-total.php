@@ -5,7 +5,7 @@
  * Description:          Quickest way to show total price of a single product
  * Author:               WebFix Lab
  * Author URI:           https://webfixlab.com/
- * Version:              2.3.2
+ * Version:              2.3.4
  * Requires at least:    4.9
  * Tested up to:         6.8.2
  * Requires PHP:         7.0
@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 
 // plugin path.
 define( 'SPTOTAL', __FILE__ );
-define( 'SPTOTAL_VER', '2.3.2' );
+define( 'SPTOTAL_VER', '2.3.4' );
 define( 'SPTOTAL_PATH', plugin_dir_path( SPTOTAL ) );
 
 require SPTOTAL_PATH . 'includes/class/admin/class-sptotal-loader.php';

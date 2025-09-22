@@ -142,18 +142,13 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			$price = $product->get_price();
 			if( empty( $price ) ){
 				$price = $product->get_price_html();
-				// self::log( 'sptotal:price empty - fallback price ' . $price );
 			}
-			// self::log( 'sptotal:price ' . $price . ' | ' . gettype( $price ) );
 
-			// self::log( 'price empty? ' . empty( $price ) . ', is numeric? ' . is_numeric( $price ) );
 			if( !empty( $price ) && !is_numeric( $price ) ){
 				$price = self::extract_price_from_html( $price );
-				// self::log( 'sptotal:price after extract ' . $price . ' | ' . gettype( $price ) );
 			}
 
 			$price = empty( $price ) ? 0 : (float) $price;
-			// self::log( 'sptotal:final price ' . $price . ' | ' . gettype( $price ) );
 
 			if( is_numeric( $price ) ){
 				$price = number_format(
@@ -204,16 +199,6 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			$price_text = str_replace( $ds, '.', $price_text );
 
 			return (float) $price_text;
-		}
-		
-		private function log( $data ) {
-			if ( true === WP_DEBUG ) {
-				if ( is_array( $data ) || is_object( $data ) ) {
-					error_log( print_r( $data, true ) );
-				} else {
-					error_log( $data );
-				}
-			}
 		}
 
 		/**
