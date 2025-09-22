@@ -1,37 +1,33 @@
 # Single Product Total for WooCommerce
 
-Enhance your product page by displaying the total product price based on the quantity selected by the customer.
+The quickest and lightest way to show total price on product page.
 
 ## Description
 
-Single Product Total for WooCommerce allows you to display the total price of a product on the single product page based on the selected quantity. This helps customers quickly understand the total cost of the product they want to purchase.
+This plugin displays total price on WooCommerce product pages. A simple and sleek design along with a wide variety of design choices. Together with an add to cart button within the total price section it becomes a very useful feature. Especially if it's displayed in floating or fixed positions. Supports all basic WooCommerce product types like simple, variable and grouped products. 
 
-The plugin supports single, variable, and grouped products. It also provides extensive styling options to match your store’s design. For heavier sites, the variable price loading delay can be adjusted from the default 1 second up to 4 seconds. Additionally, an add-to-cart button can be positioned in fixed locations, such as the bottom right of the page, for improved usability.
+<!-- A very comprehensive admin settings page designed to maximize user comfort. -->
+
+With new **animation duration option** users can adjust the timing to load total price. This feature is very helpful if you have a product page with lots of plugins installed. Just set a bit high loader time and it will automatically support **WooCommerce Discount Plugins**. Change it according to your site's rquirements.
 
 [Demo](http://demo.webfixlab.com/product/flame-steak/) | [Bug Report](https://wordpress.org/support/plugin/single-product-total/)
 
 ## Features
 
-- Variable price loading delay admin option (default 1s, adjustable for heavier sites).
-- Add to cart button inside total price section for fixed positions (e.g., bottom right fixed).
-- Supports Single, Variable, and Grouped products.
-- Supports dynamic pricing and currency formatting.
-- 8 different positions to display the total price.
-- User-friendly and easy to install.
+- **New!** Auto disable total price add to cart button.
+- Supports simple, variable and grouped products.
+- **7+ positions** to display total price on different positions on the product page.
+- Price **animation duration** option which allows time for **3rd party pricing plugins**.
+- Automatic **currency** and **price formats** support.
+- Add to cart button for total price (available for **fixed or floating** positions only).
+- Decent amount of styling options.
+- Optimized and compatible with the latest WooCommerce and WordPress versions.
 
-## Installation
+## Installation and Usage
 
-1. Download the plugin zip file.
-2. Go to your WordPress dashboard.
-3. Navigate to **Plugins > Add New**.
-4. Click **Upload Plugin** and select the downloaded zip file.
-5. Click **Install Now**, then **Activate** the plugin.
-
-## Usage
-
-1. Navigate to **Sidebar Menu > Product Total**.
-2. Customize the display options, pricing settings, and delay adjustments.
-3. Save the changes, and the total price will be displayed on the product page.
+- Download and install the [Single Product Total for WooCommerce](https://wordpress.org/plugins/single-product-total/).
+- Activate it and navigate to **Product Total** on the admin side menu.
+- You can use it directly or customize it as you like.
 
 ## Support
 
