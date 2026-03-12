@@ -5,13 +5,13 @@
  * Description:          Quickest way to show total price of a single product
  * Author:               WebFix Lab
  * Author URI:           https://webfixlab.com/
- * Version:              2.3.4
+ * Version:              2.4.0
  * Requires at least:    4.9
- * Tested up to:         6.8.2
+ * Tested up to:         6.8.3
  * Requires PHP:         7.0
  * Tags:                 woocommerce product total,single product total,product total
  * WC requires at least: 3.6
- * WC tested up to:      10.1.2
+ * WC tested up to:      10.3.5
  * License:              GPL2
  * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
  * Requires Plugins:     woocommerce
@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 
 // plugin path.
 define( 'SPTOTAL', __FILE__ );
-define( 'SPTOTAL_VER', '2.3.4' );
+define( 'SPTOTAL_VER', '2.4.0' );
 define( 'SPTOTAL_PATH', plugin_dir_path( SPTOTAL ) );
 
 require SPTOTAL_PATH . 'includes/class/admin/class-sptotal-loader.php';

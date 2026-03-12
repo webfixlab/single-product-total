@@ -13,7 +13,7 @@
 			this.$working    = false;
 			this.$priceWrap  = $(document).find('.sptotal-price');
 			this.$totalPrice = this.$priceWrap.find('.total-price');
-			this.$cartBtn    = $(document).find('form.cart .single_add_to_cart_button');
+			this.$cartBtn    = $(document).find('#content form.cart .single_add_to_cart_button');
 
 			$(document).ready(function(){
 				setTimeout(function(){
@@ -23,64 +23,54 @@
 		}
 		init(){
 			const self = this;
-
-			this.handleOtherTriggers();
-			this.updateTotal();
-
-			$(document).on('change input', 'form.cart .quantity .qty', function(){
-				if(!self.$working ){
-					self.$working = true;
-					self.updateTotal();
-				}
+			$(document).on('change input', '#content form.ca#content form.cart .quantity .qty, #main-content form.cart .quantity .qty, #main form.cart .quantity .qty, main form.cart .quantity .qty, #brx-content form.cart .quantity .qtyrt .quantity .qty', function(){
+				self.updateTotal();
 			});
 			$(document).on('click', '.minus, .plus', function(){
-				if(!self.$working ){
-					self.$working = true;
-					self.updateTotal();
-				}
+				self.updateTotal();
 			});
 			$(document).on('click', '.sptotal-cart-btn', function(){
-				if(!self.$working ){
-					self.$working = true;
-					self.$cartBtn.trigger('click');
-				}
+				self.$cartBtn.trigger('click');
 			});
 
+			this.handleOtherTriggers();
 			this.persistantEventHandler();
+			this.priceHookEvents();
+
+			this.updateTotal();
 		}
 		handleOtherTriggers(){
-			const self = this;
+			this.initSwatches();
+			this.initYITH();			
+		}
+		initSwatches(){
+			const swatch = this.getSwatches();
+			if(!swatch.length > 0) return;
 
-			// handle variations swatches.
-			const swatch = self.getSwatches();
+			const self = this;
 			swatch.each(function(){
 				$(this).on('click', function(){
-					if(!self.$working ){
-						self.$working = true;
-						self.updateTotal();
-					}
+					self.updateTotal();
 				});
 			});
-
-			// handle YITH Dynamic Pricing.
+		}
+		initYITH(){ // handle YITH Dynamic Pricing.
 			const tables = $(document).find('.ywdpd-quantity-table');
-			if(tables.length > 0){
-				tables.each(function(){
-					$(this).find('td').each(function(){
-						$(this).on('click', function(){
-							if(!self.$working ){
-								self.$working = true;
-								self.updateTotal();
-							}
-						});
-					});
+			if(!tables.length > 0) return;
+
+			const self = this;
+			tables.find('td').each(function(){
+				$(this).on('click', function(){
+					self.updateTotal();
 				});
-			}
+			});
 		}
 
 
 
 		updateTotal(){
+			if(this.$working) return; // skip if it's already running.
+			this.$working = true;
 			const self = this;
 
 			let disableCart = false;
@@ -88,8 +78,8 @@
 			setTimeout(function(){
 				const total = self.calculateTotalPrice();
 				if(total === 0) disableCart = true;
+				
 				self.$totalPrice.text(self.parsePrice(total, 'front'));
-
 				self.loaderAnimation(self.$priceWrap, 'stop');
 				self.$working = false;
 			}, parseInt(sptotal_data.settings.delay));
@@ -100,26 +90,17 @@
 			const self = this;
 
 			let total  = 0.00;
-			const qtys = $(document).find('form.cart .quantity .qty');
+			const qtys = $(document).find('#content form.cart .quantity .qty, #main-content form.cart .quantity .qty, #main form.cart .quantity .qty, main form.cart .quantity .qty, #brx-content form.cart .quantity .qty');
 			if(qtys.length > 1){
 				$.each(qtys, function (index, item){
-					const wrap  = $(item).closest('.woocommerce-grouped-product-list-item').find('.woocommerce-grouped-product-list-item__price');
-					const price = self.parsePrice(self.getPriceText(wrap), 'back');
+					const price = self.findPrice($(item), true);
 					const qty   = $(item).val();
 					if(qty.length > 0 && price.length > 0){
 						total += (parseFloat(price) * parseInt(qty));
 					}
 				});
 			} else {
-				let wrap = $(document).find('.single_variation_wrap');
-				if(wrap.length !== 0){
-					wrap = wrap.find('.woocommerce-variation-price');
-				} else {
-					wrap = $(document).find('.wp-block-columns .wp-block-woocommerce-product-price');
-				}
-				wrap = wrap.length === 0 || wrap.text().length === 0 ? $(document).find('p.price') : wrap;
-
-				const price = this.parsePrice(this.getPriceText(wrap), 'back');
+				const price = this.findPrice(null, false);
 				const qty   = qtys.val();
 				if(qty.length > 0 && price.length > 0){
 					total += (parseFloat(price) * parseInt(qty));
@@ -127,19 +108,16 @@
 			}
 			return this.checkForIssues() ? 0.00 : total;
 		}
-		parsePrice(price, flow='front'){
-			if(price === undefined){
-				return 0.0;
+		findPrice(qtyField, isGroup){
+			let wrap = null;
+			if(isGroup){
+				wrap = qtyField.closest('.woocommerce-grouped-product-list-item').find('.woocommerce-grouped-product-list-item__price');
+			}else{
+				wrap = $(document).find('.single_variation_wrap');
+				wrap = wrap.length ? wrap = wrap.find('.woocommerce-variation-price') : $(document).find('.wp-block-columns .wp-block-woocommerce-product-price');
+				wrap = !wrap.length || !wrap.text().length ? $(document).find('p.price') : wrap;
 			}
-			if(flow === 'front'){ // parse price to text price.
-				price = parseFloat(price).toFixed(sptotal_data['dp']);
-				price = price.replace('.', sptotal_data['ds']);
-				price = price.replace(/\B(?=(\d{3})+(?!\d))/g, sptotal_data['ts']);
-			} else { // parse text to find price.
-				price = price.replace(/[^\d.,]/g, ''); // filter out number parts from string.
-				price = price.replace(sptotal_data['ts'], ''); // thousand separator.
-				price = price.replace(sptotal_data['ds'], '.'); // decimal separator.
-			}
+			const price = this.parsePrice(this.getPriceText(wrap), 'back');
 			return price;
 		}
 		getPriceText(wrap){
@@ -157,6 +135,21 @@
 			}
 
 			return text;
+		}
+		parsePrice(price, flow='front'){
+			if(price === undefined){
+				return 0.0;
+			}
+			if(flow === 'front'){ // parse price to text price.
+				price = parseFloat(price).toFixed(sptotal_data['dp']);
+				price = price.replace('.', sptotal_data['ds']);
+				price = price.replace(/\B(?=(\d{3})+(?!\d))/g, sptotal_data['ts']);
+			} else { // parse text to find price.
+				price = price.replace(/[^\d.,]/g, ''); // filter out number parts from string.
+				price = price.replace(sptotal_data['ts'], ''); // thousand separator.
+				price = price.replace(sptotal_data['ds'], '.'); // decimal separator.
+			}
+			return price;
 		}
 		checkForIssues(){
 			let hasIssue = false;
@@ -253,6 +246,26 @@
 				else totalCartBtn.removeClass('sptotal-disable');
 			}, sptotal_data.settings.delay);
 		}
+
+		priceHookEvents(){
+			// 3rd party: Discount Rules and Dynamic Pricing for WooCommerce.
+			$(document).ajaxSuccess((event, xhr, settings) => {
+				if (settings.data && settings.data.indexOf('action=wccs_live_price') !== -1) {
+					setTimeout(() => {
+						this.wccsPrice();
+					}, 10);
+				}
+			});
+		}
+		wccsPrice(){
+			// 3rd party: Discount Rules and Dynamic Pricing for WooCommerce.
+			const wccsWrap = $(document).find('.wccs-live-total-price.price');
+			if(wccsWrap.length > 0){
+				const total = this.parsePrice(this.getPriceText(wccsWrap), 'back');
+				this.$totalPrice.text(this.parsePrice(total, 'front'));
+			}
+		}
+		
 	}
 	new ProductTotalNew();
 })(jQuery, window, document);

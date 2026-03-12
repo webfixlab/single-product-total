@@ -3,10 +3,10 @@ Contributors: webfixlab, aikya, smshahriar
 Tags: woocommerce product total, single product total, product total
 Requires at least: 4.9
 Tested up to: 6.8.2
-Stable tag: 2.3.4
+Stable tag: 2.4.0
 Requires PHP: 7.0
 WC requires at least: 3.6
-WC tested up to: 10.1.2
+WC tested up to: 10.3.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,10 @@ Additionally, an add to cart button can be placed in fixed positions, such as th
 
 == FEATURES ==
 
-* New! Auto disable add to cart button dynamically.
+* New! **Discount Rules and Dynamic Pricing for WooCommerce** support.
+* Dynamic product pricing plugins support.
+* Bulk discounts plugins support. 
+* Auto disable add to cart button dynamically.
 * 8 different positions to display total price.
 * Floating positions available to display total price.
 * Animation duration option (default 1000ms or 1 second, increase it for heavy sites).
@@ -81,3 +84,12 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 5. Admin settings page (appearence section)
 6. Simple product - before add to cart
 7. Mobile view of simple product - fixed position
+
+== Changelog ==
+
+= 2.4.1 2026-02-02 =
+
+**Single product total**
+
+* Fix - Quantity field selector
+* Update - Added new support for **Discount Rules and Dynamic Pricing for WooCommerce**
