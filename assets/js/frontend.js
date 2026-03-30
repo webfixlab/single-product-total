@@ -9,7 +9,7 @@
 	class SPTotalPrice{
 		constructor(){
             this.timer = null; // debounce previous event timing.
-            this.delay = parseInt( sptotal_data.settings.delay ) || 1000; // event delay.
+            this.delay = parseInt( sptotal_data.delay ) || 1000; // event delay.
             this.total = 0.0; // total price.
 			$( document ).ready( () => this.initEvents() );
 		}
@@ -80,10 +80,12 @@
             }
 
             // check for variation price.
-            let priceWrap = $( document ).find( '.single_variation_wrap .woocommerce-variation-price' );
+            if( $( 'body' ).hasClass( 'product-type-variable' ) ){
+                return $( document ).find( '.single_variation_wrap .woocommerce-variation-price' );
+            }
 
             // check for block theme product price.
-            priceWrap = ! priceWrap || 0 === priceWrap.length ? $( document ).find( '.wp-block-columns .wp-block-woocommerce-product-price' ) : priceWrap;
+            let priceWrap = $( document ).find( '.wp-block-columns .wp-block-woocommerce-product-price' );
 
             // final price fallback.
             return ! priceWrap || 0 === priceWrap.length ? $( document ).find( 'p.price' ) : priceWrap;
@@ -93,9 +95,7 @@
             
             // or check anything that's not regular price.
             priceHtml = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).not( 'del .woocommerce-Price-amount' );
-
             priceHtml = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).last(); // use last price wrapper.
-            
             priceHtml = priceHtml.last().text().trim();
             if( ! priceHtml ){
                 return 0;
@@ -112,10 +112,15 @@
         updateTotalPriceHtml( override = '' ){
             const total = 'number' === typeof override ? override : this.total;
             this.total = total; // reset total value.
-            const formattedPrice = parseFloat( total ).toFixed( sptotal_data.dp || 2 ).replace( '.', sptotal_data.ds );
+            const formattedPrice = parseFloat( total ).toLocaleString( sptotal_data.locale, {
+                minimumFractionDigits: sptotal_data.dp,
+                maximumFractionDigits: sptotal_data.dp,
+                useGrouping: true
+            } );
             $( '.sptotal-price bdi' ).contents().filter( function(){
                 return this.nodeType === 3;
             } ).first().replaceWith( formattedPrice );
+
         }
         addToCartHandler(){
             let cartBtn = $( document ).find( 'form.cart .single_add_to_cart_button' );
@@ -143,7 +148,6 @@
         }
         defaultVariationChanged(){
             $( document ).on( 'change', '.variations select', ( e ) => this.variationEventHandler( $( e.currentTarget ).find( 'option:selected' ).val() ) );
-
 			$( document ).on( 'click', 'a.reset_variations', () => this.variationEventHandler( 0 ) );
         }
         variationEventHandler( value ){

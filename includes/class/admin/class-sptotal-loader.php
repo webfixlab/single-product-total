@@ -282,39 +282,19 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 				return;
 			}
 
-			$cls = new SPTotal();
-
-			$data  = array();
-			$theme = wp_get_theme();
-
-			$position = get_option( 'sptotal_total_position' );
-			$delay    = get_option( 'sptotal_delay' );
-			$position = false === $position || empty( $position ) ? 'before_cart_btn' : $position;
-			$delay    = false === $delay || empty( $delay ) ? 1000 : $delay;
+			$delay = get_option( 'sptotal_delay' );
+			$delay = false === $delay || empty( $delay ) ? 1000 : $delay;
 
 			// add localized variables.
 			$data = array(
-				'ajaxurl'  => admin_url( 'admin-ajax.php' ),
-				'theme'    => $theme->name,
-				'dp'       => get_option( 'woocommerce_price_num_decimals', 2 ), // decimal point.
-				'ds'       => wc_get_price_decimal_separator(), // decimal separator.
-				'ts'       => wc_get_price_thousand_separator(), // thousand separator.
-				'settings' => array(
-					'position' => $position,
-					'delay'    => $delay,
-				),
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
+				'locale'  => str_replace( '_', '-', get_locale() ),
+				'dp'      => get_option( 'woocommerce_price_num_decimals', 2 ), // decimal point.
+				'ds'      => wc_get_price_decimal_separator(), // decimal separator.
+				'ts'      => wc_get_price_thousand_separator(), // thousand separator.
+				'delay'   => $delay,
 			);
-
-			ob_start();
-			$cls->display_total();
-			$data['html'] = ob_get_clean();
-
-			// get price.
-			$product = wc_get_product( $post->ID );
-			if ( isset( $product ) && ! empty( $product ) ) {
-				$data['type'] = $product->get_type();
-			}
-
+			
 			// apply filter.
 			$data = apply_filters( 'sptotal_clocal_variables', $data );
 

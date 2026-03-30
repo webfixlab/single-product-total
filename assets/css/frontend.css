@@ -10,6 +10,7 @@
 }
 .sptotal.sptotal-block > span {
 	display: block;
+	width: 50%;
 	border-bottom: 1px solid #cccccc;
 	margin: 0;
 }
@@ -106,6 +107,7 @@
 @media screen and (max-width: 767px) {
 	.sptotal.sptotal-block span{
 		padding-right: 0;
+		width: 100%;
 	}
 	.sptotal.fixed span, .sptotal.fixed .currency, .sptotal.fixed .total-price{
 		font-size: 14px;
