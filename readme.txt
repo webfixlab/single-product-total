@@ -2,11 +2,11 @@
 Contributors: webfixlab, aikya, smshahriar
 Tags: woocommerce product total, single product total, product total
 Requires at least: 4.9
-Tested up to: 6.8.2
-Stable tag: 2.4.0
+Tested up to: 6.9.4
+Stable tag: 3.0.0
 Requires PHP: 7.0
 WC requires at least: 3.6
-WC tested up to: 10.3.5
+WC tested up to: 10.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,17 +24,12 @@ Additionally, an add to cart button can be placed in fixed positions, such as th
 
 == FEATURES ==
 
-* New! **Discount Rules and Dynamic Pricing for WooCommerce** support.
-* Dynamic product pricing plugins support.
-* Bulk discounts plugins support. 
-* Auto disable add to cart button dynamically.
-* 8 different positions to display total price.
-* Floating positions available to display total price.
-* Animation duration option (default 1000ms or 1 second, increase it for heavy sites).
-* Add to cart button inside total price, only for floating or fixed positions (e.g., bottom right fixed).
-* Supports Single, Variable and Grouped products.
-* Total price label and background color customization.
-* Automatic currency and price formats support.
+* New! Improved **currency and price formats** support.
+* **8 different positions** to display total price with **4 sticky position**
+* Animation duration option to add time for **dynamic discount plugins**.
+* Extra **Add to cart button** on sticky positions.
+* Supports Single, Variable and **Grouped products**.
+* **Discount Rules and Dynamic Pricing for WooCommerce** support.
 * Easy design customization options.
 
 == BENEFITS ==
@@ -86,6 +81,15 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 7. Mobile view of simple product - fixed position
 
 == Changelog ==
+
+= 3.0.0 2026-03-30 =
+
+**Single product total**
+
+* Update - Total price is in sync with WooCommerce.
+* Update - Price sanitization update for a wide range of use cases.
+* Fix    - Quantity field selector grabbing minicart quantities issue.
+* Update - Automatic disable of cart button removed.
 
 = 2.4.1 2026-02-02 =
 

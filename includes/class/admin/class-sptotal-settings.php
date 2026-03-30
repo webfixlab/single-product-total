@@ -263,38 +263,13 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 		 */
 		public function display_notice() {
 			global $sptotal__;
-
-			$allowed_html = wp_kses_allowed_html( 'post' );
-
-			if ( empty( $allowed_html ) ) {
-				$allowed_html = array(
-					'div'    => array(
-						'id'    => array(),
-						'class' => array(),
-					),
-					'h3'     => array( 'class' => array() ),
-					'p'      => array( 'class' => array() ),
-					'a'      => array(
-						'href'  => array(),
-						'class' => array(),
-					),
-					'strong' => array( 'class' => array() ),
-					'button' => array(
-						'type'  => array(),
-						'class' => array(),
-					),
-					'span'   => array( 'class' => array() ),
-				);
+			
+			if( ! isset( $sptotal__['notice'] ) || empty( $sptotal__['notice'] ) ) {
+				return;
 			}
 
-			$allowed_html['style']  = array();
-			$allowed_html['script'] = array();
-
-			// display admin notices.
-			if ( isset( $sptotal__['notice'] ) ) {
-				foreach ( $sptotal__['notice'] as $notice ) {
-					echo wp_kses( $notice, $allowed_html );
-				}
+			foreach ( $sptotal__['notice'] as $notice ) {
+				echo wp_kses_post( $notice );
 			}
 		}
 	}

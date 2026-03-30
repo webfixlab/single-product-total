@@ -117,7 +117,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 		public function total_price(){
 			?>
 			<div class="sptotal-price" style="<?php echo esc_html( $this->settings['styles']['price'] ); ?>">
-				<?php $this->display_price(); ?>
+				<?php echo wc_price( 0.0 ); ?>
 			</div>
 			<?php
 		}
@@ -130,77 +130,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			<div class="sptotal-cart-btn"><?php echo esc_html( $this->settings['cart_btn_txt'] ); ?></div>
 			<?php
 		}
-
-		/**
-		 * Return total price html
-		 *
-		 * @param string $price product price.
-		 */
-		public function display_price() {
-			global $product;
-
-			$price = $product->get_price();
-			if( empty( $price ) ){
-				$price = $product->get_price_html();
-			}
-
-			if( !empty( $price ) && !is_numeric( $price ) ){
-				$price = self::extract_price_from_html( $price );
-			}
-
-			$price = empty( $price ) ? 0 : (float) $price;
-
-			if( is_numeric( $price ) ){
-				$price = number_format(
-					$price,
-					wc_get_price_decimals(),
-					wc_get_price_decimal_separator(),
-					wc_get_price_thousand_separator()
-				);
-			}
-
-			$all_formats = array( // all price formatting options. here 
-				'left'        => '%1$s%2$s',
-				'right'       => '%2$s%1$s',
-				'left_space'  => '%1$s&nbsp;%2$s',
-				'right_space' => '%2$s&nbsp;%1$s',
-			);
-			$pos = get_option( 'woocommerce_currency_pos' ) ?? 'left_space'; // get currency with position settings.
-			?>
-			<bdi>
-				<?php echo sprintf(
-					// translators: %1$s: currency symbol, %2$s: price html.
-					$all_formats[$pos],
-					get_woocommerce_currency_symbol(),
-					"<span class=\"total-price\">{$price}</span>"
-				); ?>
-			</bdi>
-			<?php
-		}
-		public function extract_price_from_html( $price_html ) {
-			if( empty( $price_html ) ) return 0.0;
-
-			$ds = get_option( 'woocommerce_price_decimal_sep', '.' );
-			$ts = get_option( 'woocommerce_price_thousand_sep', ',' );
-
-			$price_text = '';
-			if( preg_match( '/<ins[^>]*>(.*?)<\/ins>/is', $price_html, $m ) ) {
-				$price_text = $m[1];
-			} elseif( preg_match( '/<bdi[^>]*>(.*?)<\/bdi>/is', $price_html, $m ) ) {
-				$price_text = $m[1];
-			}
-			if( empty( $price_text ) ) return 0.0;
-
-			$price_text = str_replace( get_woocommerce_currency_symbol(), '', $price_text );
-			$price_text = wp_strip_all_tags( $price_text );
-			$price_text = html_entity_decode( $price_text );
-			
-			$price_text = str_replace( $ts, '', $price_text );
-			$price_text = str_replace( $ds, '.', $price_text );
-
-			return (float) $price_text;
-		}
-
+		
 		/**
 		 * Get color settings
 		 */
