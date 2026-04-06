@@ -72,22 +72,22 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 
 == Screenshots ==
 
-1. Simple product - fixed position
-2. Variable product page - fixed position
-3. Groupded product page - fixed position
-4. Admin settings page (general section)
-5. Admin settings page (appearence section)
-6. Simple product - before add to cart
-7. Mobile view of simple product - fixed position
+1. Total price before cart button for simple product
+2. Sticky bottom right total price for variable product
+3. Grouped product total price demo
+4. Desktop and mobile view comparison for sticky total price
+5. Total price in separate lines
+6. Admin settings page (general section)
+7. Admin settings page (appearence section)
 
 == Changelog ==
 
-= 3.0.0 2026-03-30 =
+= 3.0.0 2026-03-31 =
 
 **Single product total**
 
 * Update - Total price is in sync with WooCommerce.
-* Update - Price sanitization update for a wide range of use cases.
+* Update - Frotend price extraction update for a wide range of use cases.
 * Fix    - Quantity field selector grabbing minicart quantities issue.
 * Update - Automatic disable of cart button removed.
 
