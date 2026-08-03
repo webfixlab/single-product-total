@@ -93,9 +93,13 @@
         extractPriceFromHtml( priceWrap ){
             let priceHtml = priceWrap.find( 'ins .woocommerce-Price-amount' );
             
-            // or check anything that's not regular price.
             priceHtml = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).not( 'del .woocommerce-Price-amount' );
             priceHtml = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).last(); // use last price wrapper.
+            
+            if( priceHtml.length > 1 ){
+                priceHtml = priceHtml.last().is( ':hidden' ) ? priceHtml.first() : priceHtml.last();
+            }
+
             priceHtml = priceHtml.last().text().trim();
             if( ! priceHtml ){
                 return 0;

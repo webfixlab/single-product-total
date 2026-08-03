@@ -212,15 +212,17 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 				return;
 			}
 
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
 			// enqueue style.
-			wp_register_style( 'sptotal_admin_style', plugin_dir_url( SPTOTAL ) . 'assets/css/admin/admin.css', array(), SPTOTAL_VER );
+			wp_register_style( 'sptotal_admin_style', plugin_dir_url( SPTOTAL ) . 'assets/css/admin/admin' . $suffix . '.css', array(), SPTOTAL_VER );
 			wp_enqueue_style( 'sptotal_admin_style' );
 
 			// colorpicker.
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'wp-color-picker' );
 
-			wp_register_script( 'sptotal_admin_script', plugin_dir_url( SPTOTAL ) . 'assets/js/admin/admin.js', array( 'jquery' ), SPTOTAL_VER, true );
+			wp_register_script( 'sptotal_admin_script', plugin_dir_url( SPTOTAL ) . 'assets/js/admin/admin' . $suffix . '.js', array( 'jquery' ), SPTOTAL_VER, true );
 			wp_enqueue_script( 'sptotal_admin_script' );
 
 			$var = array(
@@ -260,8 +262,10 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 				return;
 			}
 
-			wp_register_style( 'sptotal_frontend_style', plugin_dir_url( SPTOTAL ) . 'assets/css/frontend.css', array(), SPTOTAL_VER );
-			wp_register_script( 'sptotal_frontend_script', plugin_dir_url( SPTOTAL ) . 'assets/js/frontend.js', array( 'jquery' ), SPTOTAL_VER, true );
+			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+			wp_register_style( 'sptotal_frontend_style', plugin_dir_url( SPTOTAL ) . 'assets/css/frontend' . $suffix . '.css', array(), SPTOTAL_VER );
+			wp_register_script( 'sptotal_frontend_script', plugin_dir_url( SPTOTAL ) . 'assets/js/frontend' . $suffix . '.js', array( 'jquery' ), SPTOTAL_VER, true );
 			
 			// enqueue style.
 			wp_enqueue_style( 'sptotal_frontend_style' );

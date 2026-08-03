@@ -2,11 +2,11 @@
 Contributors: webfixlab, aikya, smshahriar
 Tags: woocommerce product total, single product total, product total
 Requires at least: 4.9
-Tested up to: 6.9.4
-Stable tag: 3.0.0
+Tested up to: 7.0.2
+Stable tag: 3.0.1
 Requires PHP: 7.0
 WC requires at least: 3.6
-WC tested up to: 10.6.1
+WC tested up to: 10.9.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,13 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 7. Admin settings page (appearence section)
 
 == Changelog ==
+
+= 3.0.1 2026-08-02 =
+
+**Single product total**
+
+* Update - Reducing quantities isn't working fixed for Elementor Tiered discounts.
+* Fix - Before price position not working fixed.
 
 = 3.0.0 2026-03-31 =
 

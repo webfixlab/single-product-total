@@ -119,31 +119,6 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 							</td>
 						</tr>
 						<tr>
-							<th><?php echo esc_html__( 'Add to cart button', 'single-product-total' ); ?></th>
-							<td class="forminp forminp-checkbox">
-								<fieldset>
-									<label>
-										<?php $cart_btn = get_option( 'sptotal_cart_btn' ); ?>
-										<input type="checkbox" name="sptotal_cart_btn" value="on" <?php echo 'on' === $cart_btn ? 'checked' : ''; ?>>
-										<?php echo esc_html__( 'Show', 'single-product-total' ); ?>
-									</label>
-									<p class="description"><?php echo esc_html__( 'Available only to fixed positions. Like "Fixed bottom right".', 'single-product-total' ); ?></p>
-								</fieldset>
-							</td>
-						</tr>
-						<tr>
-							<th><?php echo esc_html__( 'Loading animation duration', 'single-product-total' ); ?></th>
-							<td class="forminp forminp-text">
-								<fieldset>
-									<label>
-										<?php $this->render_field( 'sptotal_delay' ); ?>
-										<?php echo esc_html__( 'ms (milliseconds).', 'single-product-total' ); ?>
-									</label>
-									<p class="description"><?php echo esc_html__( 'The waiting time to load total price. For heavy sites use long duration like 4500ms.', 'single-product-total' ); ?></p>
-								</fieldset>
-							</td>
-						</tr>
-						<tr>
 							<th><?php echo esc_html__( 'Align items', 'single-product-total' ); ?></th>
 							<td>
 								<label><?php $this->render_field( 'sptotal_text_align' ); ?></label>
@@ -163,9 +138,34 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 							</td>
 						</tr>
 						<tr>
+							<th><?php echo esc_html__( 'Loading animation duration', 'single-product-total' ); ?></th>
+							<td class="forminp forminp-text">
+								<fieldset>
+									<label>
+										<?php $this->render_field( 'sptotal_delay' ); ?>
+										<?php echo esc_html__( 'ms (milliseconds).', 'single-product-total' ); ?>
+									</label>
+									<p class="description"><?php echo esc_html__( 'The waiting time to load total price. For heavy sites use long duration like 4500ms.', 'single-product-total' ); ?></p>
+								</fieldset>
+							</td>
+						</tr>
+						<tr>
 							<th><?php echo esc_html__( 'Price label', 'single-product-total' ); ?></th>
 							<td>
 								<label><?php $this->render_field( 'sptotal_total_text' ); ?></label>
+							</td>
+						</tr>
+						<tr>
+							<th><?php echo esc_html__( 'Add to cart button', 'single-product-total' ); ?></th>
+							<td class="forminp forminp-checkbox">
+								<fieldset>
+									<label>
+										<?php $cart_btn = get_option( 'sptotal_cart_btn' ); ?>
+										<input type="checkbox" name="sptotal_cart_btn" value="on" <?php echo 'on' === $cart_btn ? 'checked' : ''; ?>>
+										<?php echo esc_html__( 'Show', 'single-product-total' ); ?>
+									</label>
+									<p class="description"><?php echo esc_html__( 'Available only for fixed positions. Like "Fixed bottom right".', 'single-product-total' ); ?></p>
+								</fieldset>
 							</td>
 						</tr>
 						<tr>

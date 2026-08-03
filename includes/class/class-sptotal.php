@@ -53,7 +53,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 		 */
 		public function init() {
 			if ( 'before_price' === $this->settings['position'] ) {
-				add_action( 'woocommerce_single_product_summary', array( $this, 'display_total' ), 9 );
+				add_filter( 'render_block_core/post-title', array( $this, 'total_before_price' ), 10, 9 );
 			} elseif ( 'after_price' === $this->settings['position'] ) {
 				add_action( 'woocommerce_single_product_summary', array( $this, 'display_total' ), 11 );
 			} elseif ( 'after_cart_btn' === $this->settings['position'] ) {
@@ -65,7 +65,22 @@ if ( ! class_exists( 'SPTotal' ) ) {
 			}
 		}
 
+		/**
+		 * Display total price before product price.
+		 */
+		public function total_before_price( $block_content, $block, $instance ) {
+			$namespace              = $instance->attributes['__woocommerceNamespace'] ?? '';
+			$is_product_title_block = 'woocommerce/product-collection/product-title' === $namespace;
+			if ( $is_product_title_block ) {
+				return $block_content;
+			}
 
+			ob_start();
+			$this->display_total();
+			$block_content .= ob_get_contents();
+
+			return $block_content;
+		}
 
 		/**
 		 * Display total price
