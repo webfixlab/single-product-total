@@ -108,6 +108,15 @@
 .elementor-widget-container .sptotal{
 	margin: 0;
 }
+.total-qty {
+	font-size: 13px;
+	font-weight: bold;
+	color: #fff;
+	margin-left: 10px;
+	background: #7e7e7e;
+	border-radius: 5px;
+	padding: 3px 8px;
+}
 @media screen and (max-width: 767px) {
 	.sptotal.sptotal-block span{
 		padding-right: 0;

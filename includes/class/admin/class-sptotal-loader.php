@@ -286,17 +286,21 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 				return;
 			}
 
-			$delay = get_option( 'sptotal_delay' );
-			$delay = false === $delay || empty( $delay ) ? 1000 : $delay;
+			$delay        = get_option( 'sptotal_delay' );
+			$price_format = get_option( 'sptotal_price_format' );
 
 			// add localized variables.
 			$data = array(
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-				'locale'  => str_replace( '_', '-', get_locale() ),
-				'dp'      => get_option( 'woocommerce_price_num_decimals', 2 ), // decimal point.
-				'ds'      => wc_get_price_decimal_separator(), // decimal separator.
-				'ts'      => wc_get_price_thousand_separator(), // thousand separator.
-				'delay'   => $delay,
+				'ajaxurl'  => admin_url( 'admin-ajax.php' ),
+				'locale'   => str_replace( '_', '-', get_locale() ),
+				'dp'       => get_option( 'woocommerce_price_num_decimals', 2 ), // decimal point.
+				'ds'       => wc_get_price_decimal_separator(), // decimal separator.
+				'ts'       => wc_get_price_thousand_separator(), // thousand separator.
+				'delay'    => $delay,
+				'settings' => array(
+					'delay'        => empty( $delay ) ? 1000 : $delay,
+					'price_format' => empty( $price_format ) ? 'none' : $price_format,
+				),
 			);
 			
 			// apply filter.

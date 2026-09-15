@@ -2,8 +2,8 @@
 Contributors: webfixlab, aikya, smshahriar
 Tags: woocommerce product total, single product total, product total
 Requires at least: 4.9
-Tested up to: 7.0.2
-Stable tag: 3.0.1
+Tested up to: 7.1
+Stable tag: 3.1.0
 Requires PHP: 7.0
 WC requires at least: 3.6
 WC tested up to: 10.9.4
@@ -24,7 +24,8 @@ Additionally, an add to cart button can be placed in fixed positions, such as th
 
 == FEATURES ==
 
-* New! Improved **currency and price formats** support.
+* New! Option to modify price with extra contents like saved amount.
+* Improved **currency and price formats** support.
 * **8 different positions** to display total price with **4 sticky position**
 * Animation duration option to add time for **dynamic discount plugins**.
 * Extra **Add to cart button** on sticky positions.
@@ -81,6 +82,12 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 7. Admin settings page (appearence section)
 
 == Changelog ==
+
+= 3.1.0 2026-09-09 =
+
+**Single product total**
+
+* Update - New total price extra content option added.
 
 = 3.0.1 2026-08-02 =
 

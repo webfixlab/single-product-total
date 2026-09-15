@@ -11,6 +11,9 @@
             this.timer = null; // debounce previous event timing.
             this.delay = parseInt( sptotal_data.delay ) || 1000; // event delay.
             this.total = 0.0; // total price.
+            this.qty     = 0; // total product quantities.
+            this.regular = 0; // regular price.
+
 			$( document ).ready( () => this.initEvents() );
 		}
         initEvents(){
@@ -45,6 +48,7 @@
             const qtyWraps = $( document ).find( '#content form.cart .quantity .qty, #main-content form.cart .quantity .qty, #main form.cart .quantity .qty, main form.cart .quantity .qty, #brx-content form.cart .quantity .qty' );
 
             this.total = 0;
+            this.qty   = 0;
             if( 1 === qtyWraps.length ){
                 this.updateProductTotal( qtyWraps, false );
             } else {
@@ -72,6 +76,9 @@
             if( isNaN( qty ) || ! qty || 0 === qty ){
                 return;
             }
+
+            this.qty += qty;
+            
             this.total = isGrouped ? this.total + ( price * qty ) : price * qty;
         }
         getPriceWrap( el, isGrouped ){
@@ -93,20 +100,27 @@
         extractPriceFromHtml( priceWrap ){
             let priceHtml = priceWrap.find( 'ins .woocommerce-Price-amount' );
             
-            priceHtml = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).not( 'del .woocommerce-Price-amount' );
-            priceHtml = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).last(); // use last price wrapper.
+            priceHtml       = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).not( 'del .woocommerce-Price-amount' );
+            let regularHtml = ! priceHtml || 0 === priceHtml.length ? '' : priceHtml;
+            priceHtml       = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).last(); // use last price wrapper.
             
             if( priceHtml.length > 1 ){
                 priceHtml = priceHtml.last().is( ':hidden' ) ? priceHtml.first() : priceHtml.last();
             }
 
-            priceHtml = priceHtml.last().text().trim();
+
+            console.log( 'first', regularHtml.first(), 'last', regularHtml.last() );
+            this.regular += this.extractToNumber( regularHtml.first().text().trim() );
+            return this.extractToNumber( priceHtml.last().text().trim() );
+        }
+        extractToNumber( priceHtml ){
             if( ! priceHtml ){
                 return 0;
             }
             
             const escapedTS = sptotal_data.ts.replace( /[.*+?^${}()|[\]\\]/g, '\\$&' ); // escaped thousand separator first for accuracy.
             let priceString = priceHtml.replace( new RegExp( escapedTS, 'g' ), '' ); // completely remove ts.
+
             priceString = priceString.replace( sptotal_data.ds, '.' ); // remove decimal separator.
             priceString = priceString.replace( /[^\d.]/g, '' ); // extract digits only.
 
@@ -115,16 +129,32 @@
         }
         updateTotalPriceHtml( override = '' ){
             const total = 'number' === typeof override ? override : this.total;
-            this.total = total; // reset total value.
-            const formattedPrice = parseFloat( total ).toLocaleString( sptotal_data.locale, {
+            this.total  = total; // reset total value.
+
+            let totalPrice = parseFloat( total ).toLocaleString( sptotal_data.locale, {
                 minimumFractionDigits: sptotal_data.dp,
                 maximumFractionDigits: sptotal_data.dp,
                 useGrouping: true
             } );
+
             $( '.sptotal-price bdi' ).contents().filter( function(){
                 return this.nodeType === 3;
-            } ).first().replaceWith( formattedPrice );
+            } ).first().replaceWith( totalPrice );
 
+            this.appendToPrice();
+        }
+        appendToPrice(){
+            $( '.sptotal-price .total-qty' ).remove();
+
+            const format = sptotal_data.settings.price_format;
+            console.log( 'format', format, 'rp', this.regular, 'd', sptotal_data );
+            if( 0 === format.length || 'none' === format ){
+                return;
+            }
+
+            if( 'unit' === format ){
+                $( '.sptotal-price' ).append( `<span class="total-qty">x${this.qty}</span>` );
+            }
         }
         addToCartHandler(){
             let cartBtn = $( document ).find( 'form.cart .single_add_to_cart_button' );

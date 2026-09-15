@@ -112,95 +112,7 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 			<div class="sptotal-sections">
 				<div class="section general">
 					<table class="form-table">
-						<tr>
-							<th><?php echo esc_html__( 'Position', 'single-product-total' ); ?></th>
-							<td>
-								<label><?php $this->render_field( 'sptotal_total_position' ); ?></label>
-							</td>
-						</tr>
-						<tr>
-							<th><?php echo esc_html__( 'Align items', 'single-product-total' ); ?></th>
-							<td>
-								<label><?php $this->render_field( 'sptotal_text_align' ); ?></label>
-							</td>
-						</tr>
-						<tr>
-							<th><?php echo esc_html__( 'Display price and label', 'single-product-total' ); ?></th>
-							<td class="forminp forminp-checkbox">
-								<fieldset>
-									<label>
-										<?php $block = get_option( 'spline_if_inline' ); ?>
-										<input type="checkbox" name="spline_if_inline" value="on" <?php echo 'on' === $block ? 'checked' : ''; ?>>
-										<?php echo esc_html__( 'In separate lines', 'single-product-total' ); ?>
-									</label>
-									<p class="description"><?php echo esc_html__( 'It displays both label and total price in a single line by default.', 'single-product-total' ); ?></p>
-								</fieldset>
-							</td>
-						</tr>
-						<tr>
-							<th><?php echo esc_html__( 'Loading animation duration', 'single-product-total' ); ?></th>
-							<td class="forminp forminp-text">
-								<fieldset>
-									<label>
-										<?php $this->render_field( 'sptotal_delay' ); ?>
-										<?php echo esc_html__( 'ms (milliseconds).', 'single-product-total' ); ?>
-									</label>
-									<p class="description"><?php echo esc_html__( 'The waiting time to load total price. For heavy sites use long duration like 4500ms.', 'single-product-total' ); ?></p>
-								</fieldset>
-							</td>
-						</tr>
-						<tr>
-							<th><?php echo esc_html__( 'Price label', 'single-product-total' ); ?></th>
-							<td>
-								<label><?php $this->render_field( 'sptotal_total_text' ); ?></label>
-							</td>
-						</tr>
-						<tr>
-							<th><?php echo esc_html__( 'Add to cart button', 'single-product-total' ); ?></th>
-							<td class="forminp forminp-checkbox">
-								<fieldset>
-									<label>
-										<?php $cart_btn = get_option( 'sptotal_cart_btn' ); ?>
-										<input type="checkbox" name="sptotal_cart_btn" value="on" <?php echo 'on' === $cart_btn ? 'checked' : ''; ?>>
-										<?php echo esc_html__( 'Show', 'single-product-total' ); ?>
-									</label>
-									<p class="description"><?php echo esc_html__( 'Available only for fixed positions. Like "Fixed bottom right".', 'single-product-total' ); ?></p>
-								</fieldset>
-							</td>
-						</tr>
-						<tr>
-							<th><?php echo esc_html__( 'Add to cart button label', 'single-product-total' ); ?></th>
-							<td>
-								<label><?php $this->render_field( 'sptotal_cart_btn_txt' ); ?></label>
-							</td>
-						</tr>
-						<tr valign="top">
-							<th scope="row" class="titledesc">
-								<?php echo esc_html__( 'Background color', 'single-pruduct-total' ); ?>
-							</th>
-							<td class="forminp forminp-text">
-								<?php $sptotal_background = get_option( 'sptotal_background' ) ?? ''; ?>
-								<input name="sptotal_background" type="text" class="sptotal-colorpicker" value="<?php echo esc_attr( $sptotal_background ); ?>" data-default-color="">
-							</td>
-						</tr>
-						<tr valign="top">
-							<th scope="row" class="titledesc">
-								<?php echo esc_html__( 'Price color', 'single-pruduct-total' ); ?>
-							</th>
-							<td class="forminp forminp-text">
-								<?php $sptotal_price_color = get_option( 'sptotal_price_color' ) ?? ''; ?>
-								<input name="sptotal_price_color" type="text" class="sptotal-colorpicker" value="<?php echo esc_attr( $sptotal_price_color ); ?>" data-default-color="">
-							</td>
-						</tr>
-						<tr valign="top">
-							<th scope="row" class="titledesc">
-								<?php echo esc_html__( 'Price label color', 'single-pruduct-total' ); ?>
-							</th>
-							<td class="forminp forminp-text">
-								<?php $sptotal_label_color = get_option( 'sptotal_label_color' ) ?? ''; ?>
-								<input name="sptotal_label_color" type="text" class="sptotal-colorpicker" value="<?php echo esc_attr( $sptotal_label_color ); ?>" data-default-color="">
-							</td>
-						</tr>
+						<?php $this->settings_content_details(); ?>
 					</table>
 				</div>
 				<?php do_action( 'sptotal_extra_section' ); ?>
@@ -209,6 +121,109 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 				<input type="hidden" value="<?php echo esc_attr( wp_create_nonce( 'sptotal_save' ) ); ?>" name="sptotal_save">
 				<input type="submit" value="<?php echo esc_html__( 'Save changes', 'single-product-total' ); ?>" class="button-primary woocommerce-save-button sptotal-save">
 			</div>
+			<?php
+		}
+
+		/**
+		 * Display settings details
+		 */
+		private function settings_content_details(){
+			?>
+			<tr>
+				<th><?php echo esc_html__( 'Position', 'single-product-total' ); ?></th>
+				<td>
+					<label><?php $this->render_field( 'sptotal_total_position' ); ?></label>
+				</td>
+			</tr>
+			<tr>
+				<th><?php echo esc_html__( 'Align items', 'single-product-total' ); ?></th>
+				<td>
+					<label><?php $this->render_field( 'sptotal_text_align' ); ?></label>
+				</td>
+			</tr>
+			<tr>
+				<th><?php echo esc_html__( 'Display price and label', 'single-product-total' ); ?></th>
+				<td class="forminp forminp-checkbox">
+					<fieldset>
+						<label>
+							<?php $block = get_option( 'spline_if_inline' ); ?>
+							<input type="checkbox" name="spline_if_inline" value="on" <?php echo 'on' === $block ? 'checked' : ''; ?>>
+							<?php echo esc_html__( 'In separate lines', 'single-product-total' ); ?>
+						</label>
+						<p class="description"><?php echo esc_html__( 'It displays both label and total price in a single line by default.', 'single-product-total' ); ?></p>
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><?php echo esc_html__( 'Loading animation duration', 'single-product-total' ); ?></th>
+				<td class="forminp forminp-text">
+					<fieldset>
+						<label>
+							<?php $this->render_field( 'sptotal_delay' ); ?>
+							<?php echo esc_html__( 'ms (milliseconds).', 'single-product-total' ); ?>
+						</label>
+						<p class="description"><?php echo esc_html__( 'The waiting time to load total price. For heavy sites use long duration like 4500ms.', 'single-product-total' ); ?></p>
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><?php echo esc_html__( 'Add to cart button', 'single-product-total' ); ?></th>
+				<td class="forminp forminp-checkbox">
+					<fieldset>
+						<label>
+							<?php $cart_btn = get_option( 'sptotal_cart_btn' ); ?>
+							<input type="checkbox" name="sptotal_cart_btn" value="on" <?php echo 'on' === $cart_btn ? 'checked' : ''; ?>>
+							<?php echo esc_html__( 'Show', 'single-product-total' ); ?>
+						</label>
+						<p class="description"><?php echo esc_html__( 'Available only for fixed positions. Like "Fixed bottom right".', 'single-product-total' ); ?></p>
+					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><?php echo esc_html__( 'Price format', 'single-product-total' ); ?></th>
+				<td>
+					<label><?php $this->render_field( 'sptotal_price_format' ); ?></label>
+				</td>
+			</tr>
+			<tr>
+				<th><?php echo esc_html__( 'Price label', 'single-product-total' ); ?></th>
+				<td>
+					<label><?php $this->render_field( 'sptotal_total_text' ); ?></label>
+				</td>
+			</tr>
+			<tr>
+				<th><?php echo esc_html__( 'Add to cart button label', 'single-product-total' ); ?></th>
+				<td>
+					<label><?php $this->render_field( 'sptotal_cart_btn_txt' ); ?></label>
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" class="titledesc">
+					<?php echo esc_html__( 'Background color', 'single-pruduct-total' ); ?>
+				</th>
+				<td class="forminp forminp-text">
+					<?php $sptotal_background = get_option( 'sptotal_background' ) ?? ''; ?>
+					<input name="sptotal_background" type="text" class="sptotal-colorpicker" value="<?php echo esc_attr( $sptotal_background ); ?>" data-default-color="">
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" class="titledesc">
+					<?php echo esc_html__( 'Price color', 'single-pruduct-total' ); ?>
+				</th>
+				<td class="forminp forminp-text">
+					<?php $sptotal_price_color = get_option( 'sptotal_price_color' ) ?? ''; ?>
+					<input name="sptotal_price_color" type="text" class="sptotal-colorpicker" value="<?php echo esc_attr( $sptotal_price_color ); ?>" data-default-color="">
+				</td>
+			</tr>
+			<tr valign="top">
+				<th scope="row" class="titledesc">
+					<?php echo esc_html__( 'Price label color', 'single-pruduct-total' ); ?>
+				</th>
+				<td class="forminp forminp-text">
+					<?php $sptotal_label_color = get_option( 'sptotal_label_color' ) ?? ''; ?>
+					<input name="sptotal_label_color" type="text" class="sptotal-colorpicker" value="<?php echo esc_attr( $sptotal_label_color ); ?>" data-default-color="">
+				</td>
+			</tr>
 			<?php
 		}
 

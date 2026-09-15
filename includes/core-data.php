@@ -59,6 +59,15 @@ $sptotal__['fields'] = array(
 			'right'  => __( 'Right', 'single-pruduct-total' ),
 		),
 	),
+	'sptotal_price_format' => array(
+		'type'    => 'select',
+		'label'   => __( 'Price format', 'single-pruduct-total' ),
+		'options' => array(
+			'none'  => __( 'Default', 'single-product-total' ),
+			'unit'  => __( 'Append total quantity', 'single-product-total' ),
+			'saved' => __( 'Append saved amount', 'single-product-total' )
+		),
+	),
 	'sptotal_delay'          => array(
 		'type'        => 'text',
 		'label'       => __( 'Loader delay in mili-seconds', 'single-pruduct-total' ),
