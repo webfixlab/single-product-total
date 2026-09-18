@@ -61,11 +61,24 @@ $sptotal__['fields'] = array(
 	),
 	'sptotal_price_format' => array(
 		'type'    => 'select',
-		'label'   => __( 'Price format', 'single-pruduct-total' ),
+		'label'   => __( 'Append to total price', 'single-pruduct-total' ),
 		'options' => array(
-			'none'  => __( 'Default', 'single-product-total' ),
-			'unit'  => __( 'Append total quantity', 'single-product-total' ),
-			'saved' => __( 'Append saved amount', 'single-product-total' )
+			'none'    => __( 'Default - empty', 'single-product-total' ),
+			'qty'     => __( 'Quantity', 'single-product-total' ),
+			'regular' => __( 'Regular price', 'single-product-total' ),
+			'saved'   => __( 'Price saved', 'single-product-total' )
+		),
+	),
+	'sptotal_extra_text'     => array(
+		'type'  => 'text',
+		'label' => __( 'Append text to total', 'single-pruduct-total' ),
+	),
+	'sptotal_ext_position' => array(
+		'type'    => 'select',
+		'label'   => __( 'Extra text position', 'single-pruduct-total' ),
+		'options' => array(
+			'before' => __( 'Before extra text', 'single-pruduct-total' ),
+			'after'  => __( 'After extra text', 'single-pruduct-total' ),
 		),
 	),
 	'sptotal_delay'          => array(

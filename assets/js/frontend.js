@@ -10,9 +10,11 @@
 		constructor(){
             this.timer = null; // debounce previous event timing.
             this.delay = parseInt( sptotal_data.delay ) || 1000; // event delay.
-            this.total = 0.0; // total price.
-            this.qty     = 0; // total product quantities.
-            this.regular = 0; // regular price.
+
+            this.priceWrap = null; // current price wrap.
+            this.total     = 0.0; // total price.
+            this.qty       = 0; // total product quantities.
+            this.regular   = 0; // regular price.
 
 			$( document ).ready( () => this.initEvents() );
 		}
@@ -59,27 +61,27 @@
             }
 
             this.updateTotalPriceHtml();
+            this.appendToPrice();
             this.spinner( false );
         }
         updateProductTotal( el, isGrouped ){
-            const priceWrap = this.getPriceWrap( el, isGrouped );
-            if( ! priceWrap || 0 === priceWrap.length ) {
+            this.priceWrap = this.getPriceWrap( el, isGrouped );
+            if( ! this.priceWrap || 0 === this.priceWrap.length ) {
                 return;
             }
 
-            const price = this.extractPriceFromHtml( priceWrap );
-            if( 0 === price ){
-                return;
-            }
-
-            const qty = parseInt( el.val() );
-            if( isNaN( qty ) || ! qty || 0 === qty ){
+            const price = this.extractPriceFromHtml( this.priceWrap );
+            const qty   = parseInt( el.val() );
+            if( 0 === price || isNaN( qty ) || ! qty || 0 === qty ){
                 return;
             }
 
             this.qty += qty;
-            
             this.total = isGrouped ? this.total + ( price * qty ) : price * qty;
+
+            const regular = this.extractRegularPrice( this.priceWrap );
+            this.regular  = isGrouped ? this.regular + ( qty * regular ) : qty * regular;
+            // console.log( 'regular', this.regular, 'qty', qty, 'rp', regular );
         }
         getPriceWrap( el, isGrouped ){
             if( isGrouped ) {
@@ -97,21 +99,19 @@
             // final price fallback.
             return ! priceWrap || 0 === priceWrap.length ? $( document ).find( 'p.price' ) : priceWrap;
         }
-        extractPriceFromHtml( priceWrap ){
-            let priceHtml = priceWrap.find( 'ins .woocommerce-Price-amount' );
-            
-            priceHtml       = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).not( 'del .woocommerce-Price-amount' );
-            let regularHtml = ! priceHtml || 0 === priceHtml.length ? '' : priceHtml;
-            priceHtml       = priceHtml && priceHtml.length > 0 ? priceHtml : priceWrap.find( '.woocommerce-Price-amount' ).last(); // use last price wrapper.
-            
+        extractPriceFromHtml( elm ){
+            let priceHtml = elm.find( 'ins .woocommerce-Price-amount' );            
+            priceHtml     = priceHtml && priceHtml.length > 0 ? priceHtml : elm.find( '.woocommerce-Price-amount' ).not( 'del .woocommerce-Price-amount' );
+            priceHtml     = priceHtml && priceHtml.length > 0 ? priceHtml : elm.find( '.woocommerce-Price-amount' ).last(); // use last price wrapper.
             if( priceHtml.length > 1 ){
                 priceHtml = priceHtml.last().is( ':hidden' ) ? priceHtml.first() : priceHtml.last();
             }
 
-
-            console.log( 'first', regularHtml.first(), 'last', regularHtml.last() );
-            this.regular += this.extractToNumber( regularHtml.first().text().trim() );
             return this.extractToNumber( priceHtml.last().text().trim() );
+        }
+        extractRegularPrice( elm ){
+            const prices = elm.find( '.woocommerce-Price-amount' );
+            return this.extractToNumber( 1 === prices.length ? prices.text().trim() : prices.first().text().trim() );
         }
         extractToNumber( priceHtml ){
             if( ! priceHtml ){
@@ -131,31 +131,43 @@
             const total = 'number' === typeof override ? override : this.total;
             this.total  = total; // reset total value.
 
-            let totalPrice = parseFloat( total ).toLocaleString( sptotal_data.locale, {
+            $( '.sptotal-price bdi' ).contents().filter( function(){
+                return this.nodeType === 3;
+            } ).first().replaceWith( this.formatNumber( total ) );
+        }
+        formatNumber( price ){
+            return parseFloat( price ).toLocaleString( sptotal_data.locale, {
                 minimumFractionDigits: sptotal_data.dp,
                 maximumFractionDigits: sptotal_data.dp,
                 useGrouping: true
-            } );
-
-            $( '.sptotal-price bdi' ).contents().filter( function(){
-                return this.nodeType === 3;
-            } ).first().replaceWith( totalPrice );
-
-            this.appendToPrice();
+            } ).replace( ',', '%1$s' ).replace( '.', sptotal_data.ds ).replace( '%1$s', sptotal_data.ts );
         }
         appendToPrice(){
             $( '.sptotal-price .total-qty' ).remove();
 
             const format = sptotal_data.settings.price_format;
-            console.log( 'format', format, 'rp', this.regular, 'd', sptotal_data );
-            if( 0 === format.length || 'none' === format ){
+            if( ! this.priceWrap || 0 === format.length || 'none' === format ){
                 return;
             }
 
-            if( 'unit' === format ){
-                $( '.sptotal-price' ).append( `<span class="total-qty">x${this.qty}</span>` );
+            $( '.extra-content' ).remove();
+
+            if( 'qty' === format ){
+                $( '.sptotal-price' ).after( `<div class="extra-content total-qty">x${this.qty}</div>` );
+            }else if( 'regular' === format ){
+                let price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( this.regular ) );
+                price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
+                $( '.sptotal-price' ).after( `<div class="extra-content regular-total">${price}</div>` );
+            }else if( 'saved' === format ){
+                let price = this.regular - this.total;
+                if( price > 0 ){
+                    price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( price ) );
+                    price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
+                    $( '.sptotal-price' ).after( `<div class="extra-content total-saved">${price}</div>` );
+                }
             }
         }
+
         addToCartHandler(){
             let cartBtn = $( document ).find( 'form.cart .single_add_to_cart_button' );
             cartBtn = cartBtn || cartBtn.length > 0 ? cartBtn : $( document ).find( '.single_add_to_cart_button')
@@ -225,8 +237,9 @@
 				}
 			});
         }
+
+        // Discount Rules and Dynamic Pricing for WooCommerce - plugin support.
         wccsLivePriceHookHandler(){
-            // 3rd party: Discount Rules and Dynamic Pricing for WooCommerce.
 			const wccsWrap = $( document ).find( '.wccs-live-total-price.price' );
 			if ( !wccsWrap || 0 === wccsWrap.length ) {
                 return;

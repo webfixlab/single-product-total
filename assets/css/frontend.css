@@ -114,8 +114,24 @@
 	color: #fff;
 	margin-left: 10px;
 	background: #7e7e7e;
-	border-radius: 5px;
+	border-radius: 15px;
 	padding: 3px 8px;
+}
+.extra-content {
+	font-size: 15px;
+	display: inline;
+}
+.extra-content.regular-total {
+	text-decoration: line-through;
+	font-weight: normal;
+	color: #aaa;
+}
+.extra-content.total-saved {
+	background: #518ae4;
+	margin-left: 10px;
+	border-radius: 15px;
+	padding: 3px 10px;
+	color: #fff;
 }
 @media screen and (max-width: 767px) {
 	.sptotal.sptotal-block span{
