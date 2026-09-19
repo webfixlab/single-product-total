@@ -14,10 +14,6 @@
 	margin: 0;
 	width: 400px;
 }
-.sptotal-disable{
-	opacity: 0.3;
-	pointer-events: none;
-}
 .sptotal .sptotal-price {
 	font-weight: 600;
 	font-size: 17px;
@@ -108,7 +104,12 @@
 .elementor-widget-container .sptotal{
 	margin: 0;
 }
-.total-qty {
+/* Extra content section */
+.extra-content {
+	font-size: 15px;
+	display: inline-block;
+}
+.extra-content.total-qty {
 	font-size: 13px;
 	font-weight: bold;
 	color: #fff;
@@ -117,21 +118,17 @@
 	border-radius: 15px;
 	padding: 3px 8px;
 }
-.extra-content {
-	font-size: 15px;
-	display: inline;
-}
 .extra-content.regular-total {
 	text-decoration: line-through;
-	font-weight: normal;
-	color: #aaa;
+	color: #949494;
+	font-size: 17px;
 }
 .extra-content.total-saved {
-	background: #518ae4;
-	margin-left: 10px;
-	border-radius: 15px;
-	padding: 3px 10px;
+	background: #878787;
+	border-radius: 5px;
+	padding: 5px 10px;
 	color: #fff;
+	margin: 10px 0 0 0;
 }
 @media screen and (max-width: 767px) {
 	.sptotal.sptotal-block span{

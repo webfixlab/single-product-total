@@ -63,10 +63,9 @@ $sptotal__['fields'] = array(
 		'type'    => 'select',
 		'label'   => __( 'Append to total price', 'single-pruduct-total' ),
 		'options' => array(
-			'none'    => __( 'Default - empty', 'single-product-total' ),
-			'qty'     => __( 'Quantity', 'single-product-total' ),
-			'regular' => __( 'Regular price', 'single-product-total' ),
-			'saved'   => __( 'Price saved', 'single-product-total' )
+			'none'  => __( 'Default - empty', 'single-product-total' ),
+			'qty'   => __( 'Quantity details', 'single-product-total' ),
+			'saved' => __( 'Saved percentage(%)', 'single-product-total' )
 		),
 	),
 	'sptotal_extra_text'     => array(

@@ -35,16 +35,16 @@
             this.timer = setTimeout( () => this.browseProductItems(), this.delay );
         }
         spinner( isActive ){
-            const spinWrap   = $( document ).find( '.sptotal .sptotal-loading' );
-            const totalPrice = $( document ).find( '.sptotal-price' );
-
-            totalPrice.toggleClass( 'sptotal-disable', isActive );
-            if( ! spinWrap || 0 === spinWrap.length ) {
-                totalPrice.before( '<div class="sptotal-loading"></div>' );
-            }
+            const loader = $( document ).find( '.sptotal .sptotal-loading' );
             if( ! isActive ){
-                spinWrap.remove();
+                loader.remove();
+                return;
             }
+            if( ! loader || 0 === loader.length ) {
+                $( document ).find( '.sptotal' ).prepend( '<div class="sptotal-loading"></div>' );
+            }
+            // const totalPrice = $( document ).find( '.sptotal-price' );
+            // totalPrice.toggleClass( 'sptotal-disable', isActive );
         }
         browseProductItems(){
             const qtyWraps = $( document ).find( '#content form.cart .quantity .qty, #main-content form.cart .quantity .qty, #main form.cart .quantity .qty, main form.cart .quantity .qty, #brx-content form.cart .quantity .qty' );
@@ -154,11 +154,13 @@
 
             if( 'qty' === format ){
                 $( '.sptotal-price' ).after( `<div class="extra-content total-qty">x${this.qty}</div>` );
-            }else if( 'regular' === format ){
-                let price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( this.regular ) );
-                price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
-                $( '.sptotal-price' ).after( `<div class="extra-content regular-total">${price}</div>` );
-            }else if( 'saved' === format ){
+            }
+            // else if( 'regular' === format ){
+            //     let price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( this.regular ) );
+            //     price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
+            //     $( '.sptotal-price' ).after( `<div class="extra-content regular-total">${price}</div>` );
+            // }
+            else if( 'saved' === format ){
                 let price = this.regular - this.total;
                 if( price > 0 ){
                     price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( price ) );

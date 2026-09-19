@@ -180,22 +180,23 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 				</td>
 			</tr>
 			<tr>
-				<th><?php echo esc_html__( 'Add content to total price', 'single-product-total' ); ?></th>
+				<th><?php echo esc_html__( 'Append to total price', 'single-product-total' ); ?></th>
 				<td>
 					<label><?php $this->render_field( 'sptotal_price_format' ); ?></label>
+				</td>
+			</tr>
+			<tr>
+				<th><?php echo esc_html__( 'Append to total price label', 'single-product-total' ); ?></th>
+				<td>
+					<label><?php $this->render_field( 'sptotal_extra_text' ); ?></label>
+					<label><?php echo esc_html__( 'Position', 'single-product-total' ); ?></label>
+					<?php $this->render_field( 'sptotal_ext_position' ); ?>
 				</td>
 			</tr>
 			<tr>
 				<th><?php echo esc_html__( 'Price label', 'single-product-total' ); ?></th>
 				<td>
 					<label><?php $this->render_field( 'sptotal_total_text' ); ?></label>
-				</td>
-			</tr>
-			<tr>
-				<th><?php echo esc_html__( 'Total price extra content label', 'single-product-total' ); ?></th>
-				<td>
-					<label><?php $this->render_field( 'sptotal_extra_text' ); ?></label>
-					<?php $this->render_field( 'sptotal_ext_position' ); ?>
 				</td>
 			</tr>
 			<tr>
