@@ -14,6 +14,9 @@
 	margin: 0;
 	width: 400px;
 }
+.sptotal.fixed.sptotal-block > span{
+	width: auto;
+}
 .sptotal .sptotal-price {
 	font-weight: 600;
 	font-size: 17px;
@@ -63,7 +66,7 @@
 	font-size: 15px;
 	background: #575757;
 	color: #ffffff;
-	padding: 10px;
+	padding: 10px 40px;
 	margin-top: 5px;
 	margin-bottom: 5px;
 	cursor: pointer;
@@ -118,28 +121,30 @@
 	border-radius: 15px;
 	padding: 3px 8px;
 }
-.extra-content.regular-total {
-	text-decoration: line-through;
-	color: #949494;
-	font-size: 17px;
-}
-.extra-content.total-saved {
+.extra-content.total-fixed, .extra-content.total-percent {
 	background: #878787;
-	border-radius: 5px;
+	border-radius: 25px;
 	padding: 5px 10px;
 	color: #fff;
-	margin: 10px 0 0 0;
+	margin: 10px 0 0 5px;
+}
+.sptotal.fixed .extra-content {
+	display: block;
+}
+.sptotal.fixed .extra-content.total-fixed, .sptotal.fixed .extra-content.total-percent{
+	border-radius: 5px;
+	text-align: center;
+	margin: 0;
 }
 @media screen and (max-width: 767px) {
+	.sptotal-cart-btn {
+		padding: 5px 20px;
+	}
 	.sptotal.sptotal-block span{
 		padding-right: 0;
 		width: 100%;
 	}
 	.sptotal.fixed span, .sptotal.fixed .currency, .sptotal.fixed .total-price{
 		font-size: 14px;
-	}
-	.sptotal-cart-btn{
-		font-size: 13px;
-		padding: 6px;
 	}
 }

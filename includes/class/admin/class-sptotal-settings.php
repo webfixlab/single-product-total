@@ -183,6 +183,7 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 				<th><?php echo esc_html__( 'Append to total price', 'single-product-total' ); ?></th>
 				<td>
 					<label><?php $this->render_field( 'sptotal_price_format' ); ?></label>
+					<p class="description"><?php echo esc_html__( 'Saved amount is the difference between total regular and sale price. Saved percentage is calculated with that.', 'single-product-total' ); ?></p>
 				</td>
 			</tr>
 			<tr>

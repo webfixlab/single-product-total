@@ -19,7 +19,7 @@ $sptotal__['plugin'] = array(
 	),
 	'review_link'   => 'https://wordpress.org/support/plugin/single-product-total/reviews/?rate=5#new-post',
 	'free_url'      => 'https://wordpress.org/plugins/single-product-total/',
-	'contact_us'    => 'https://webfixlab.com/contact-us/',
+	'contact_us'    => 'https://webfixlab.com/contact/',
 	'name'          => __( 'Single Product Total', 'single-pruduct-total' ),
 	'woo_url'       => 'wcurl',
 );
@@ -63,9 +63,10 @@ $sptotal__['fields'] = array(
 		'type'    => 'select',
 		'label'   => __( 'Append to total price', 'single-pruduct-total' ),
 		'options' => array(
-			'none'  => __( 'Default - empty', 'single-product-total' ),
-			'qty'   => __( 'Quantity details', 'single-product-total' ),
-			'saved' => __( 'Saved percentage(%)', 'single-product-total' )
+			'none'    => __( 'None', 'single-product-total' ),
+			'qty'     => __( 'Total quantity', 'single-product-total' ),
+			'fixed'   => __( 'Total saved amount', 'single-product-total' ),
+			'percent' => __( 'Total saved percent(%)', 'single-product-total' ),
 		),
 	),
 	'sptotal_extra_text'     => array(

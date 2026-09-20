@@ -13,8 +13,10 @@
 
             this.priceWrap = null; // current price wrap.
             this.total     = 0.0; // total price.
-            this.qty       = 0; // total product quantities.
+            // this.qty       = 0; // total product quantities.
             this.regular   = 0; // regular price.
+
+            this.items = []; // qty - price relation array.
 
 			$( document ).ready( () => this.initEvents() );
 		}
@@ -49,8 +51,11 @@
         browseProductItems(){
             const qtyWraps = $( document ).find( '#content form.cart .quantity .qty, #main-content form.cart .quantity .qty, #main form.cart .quantity .qty, main form.cart .quantity .qty, #brx-content form.cart .quantity .qty' );
 
-            this.total = 0;
-            this.qty   = 0;
+            // this.total = 0;
+            // this.qty   = 0;
+
+            this.items = []; // reset item states.
+
             if( 1 === qtyWraps.length ){
                 this.updateProductTotal( qtyWraps, false );
             } else {
@@ -76,11 +81,17 @@
                 return;
             }
 
-            this.qty += qty;
-            this.total = isGrouped ? this.total + ( price * qty ) : price * qty;
+            this.items.push( {
+                qty:   qty,
+                price: price,
+                rp:    this.extractRegularPrice( this.priceWrap ), // regular price.
+            } );
 
-            const regular = this.extractRegularPrice( this.priceWrap );
-            this.regular  = isGrouped ? this.regular + ( qty * regular ) : qty * regular;
+            // this.qty += qty;
+            // this.total = isGrouped ? this.total + ( price * qty ) : price * qty;
+
+            // const regular = this.extractRegularPrice( this.priceWrap );
+            // this.regular  = isGrouped ? this.regular + ( qty * regular ) : qty * regular;
             // console.log( 'regular', this.regular, 'qty', qty, 'rp', regular );
         }
         getPriceWrap( el, isGrouped ){
@@ -128,12 +139,13 @@
             return isNaN( price ) ? 0 : price;
         }
         updateTotalPriceHtml( override = '' ){
-            const total = 'number' === typeof override ? override : this.total;
-            this.total  = total; // reset total value.
+            const total = this.items && this.items.length > 0 ? Object.values( this.items ).reduce( ( sum, item ) => {
+                return sum + item.qty * item.price;
+            }, 0 ) : 0;
 
             $( '.sptotal-price bdi' ).contents().filter( function(){
                 return this.nodeType === 3;
-            } ).first().replaceWith( this.formatNumber( total ) );
+            } ).first().replaceWith( this.formatNumber( 'number' === typeof override ? override : total ) );
         }
         formatNumber( price ){
             return parseFloat( price ).toLocaleString( sptotal_data.locale, {
@@ -143,31 +155,49 @@
             } ).replace( ',', '%1$s' ).replace( '.', sptotal_data.ds ).replace( '%1$s', sptotal_data.ts );
         }
         appendToPrice(){
-            $( '.sptotal-price .total-qty' ).remove();
-
+            // console.log( 'items', this.items );
             const format = sptotal_data.settings.price_format;
-            if( ! this.priceWrap || 0 === format.length || 'none' === format ){
+            if( 0 === format.length || 'none' === format ){
                 return;
             }
 
             $( '.extra-content' ).remove();
 
-            if( 'qty' === format ){
-                $( '.sptotal-price' ).after( `<div class="extra-content total-qty">x${this.qty}</div>` );
+            let total   = 0;
+            let itemVal = this.items && this.items.length > 0 ? Object.values( this.items ).reduce( ( sum, item ) => {
+                total += item.price * item.qty;
+                return sum + ( 'qty' === format ? item.qty : ( item.rp - item.price ) * item.qty );
+            }, 0 ) : 0;
+            if( 0 === itemVal ){
+                return;
             }
-            // else if( 'regular' === format ){
-            //     let price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( this.regular ) );
-            //     price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
-            //     $( '.sptotal-price' ).after( `<div class="extra-content regular-total">${price}</div>` );
+
+            itemVal      = 'percent' === format && itemVal > 0 ? Math.round( ( itemVal * 100 ) / total ).toFixed( 0 ) + '%' : itemVal;
+            const target = 'fixed' === format ? sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( itemVal ) ) : itemVal;
+            console.log( 'item value', itemVal, 'total', total );
+            // console.log( 'total 2', total, 'am', itemVal );
+
+            let value = 'after' === sptotal_data.ext_position ? `${target} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${target}`;
+            $( '.sptotal-price' ).after( `<div class="extra-content total-${format}">${value}</div>` );
+
+
+            // if( 'qty' === format ){
+            //     $( '.sptotal-price' ).after( `<div class="extra-content total-qty">x${qty}</div>` );
             // }
-            else if( 'saved' === format ){
-                let price = this.regular - this.total;
-                if( price > 0 ){
-                    price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( price ) );
-                    price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
-                    $( '.sptotal-price' ).after( `<div class="extra-content total-saved">${price}</div>` );
-                }
-            }
+            // // else if( 'regular' === format ){
+            // //     let price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( this.regular ) );
+            // //     price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
+            // //     $( '.sptotal-price' ).after( `<div class="extra-content regular-total">${price}</div>` );
+            // // }
+            // else if( 'fixed' === format ){}
+            // else if( 'percent' === format ){
+            //     // let price = this.regular - this.total;
+            //     // if( price > 0 ){
+            //     //     price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( price ) );
+            //     //     price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
+            //     //     $( '.sptotal-price' ).after( `<div class="extra-content total-saved">${price}</div>` );
+            //     // }
+            // }
         }
 
         addToCartHandler(){
