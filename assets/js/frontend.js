@@ -71,6 +71,10 @@
                 return;
             }
 
+            if( ! this.hasVariation() ){
+                return;
+            }
+
             this.items.push( {
                 qty:   qty,
                 price: price,
@@ -102,6 +106,12 @@
             }
 
             return this.extractToNumber( priceHtml.last().text().trim() );
+        }
+        hasVariation(){
+            const total = $( document.body ).find( 'table.variations select' );
+            return 0 === total.length || total.filter( function(){
+                return $( this ).find( 'option:selected' ).val().length > 0;
+            } ).length === total.length;
         }
         extractRegularPrice( elm ){
             const prices = elm.find( '.woocommerce-Price-amount' );
@@ -190,6 +200,7 @@
 			$( document ).on( 'click', 'a.reset_variations', () => this.variationEventHandler( 0 ) );
         }
         variationEventHandler( value ){
+            console.log( 'var value', value);
             if( ! value || 0 === value.length || 0 === value ){
                 this.updateTotalPriceHtml( 0 );
             }else{

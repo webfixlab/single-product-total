@@ -86,6 +86,7 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 
 * Update - New additional contents available to append to the total price.
 * Fix - Currency formatting isses fixed.
+* Fix - Variable product price issue when variation isn't found.
 
 = 3.0.1 2026-08-02 =
 
