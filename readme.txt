@@ -24,7 +24,7 @@ Additionally, an add to cart button can be placed in fixed positions, such as th
 
 == FEATURES ==
 
-* New! Option to modify price with extra contents like saved amount.
+* New! Additional contents available to append to the total price.
 * Improved **currency and price formats** support.
 * **8 different positions** to display total price with **4 sticky position**
 * Animation duration option to add time for **dynamic discount plugins**.
@@ -73,21 +73,19 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 
 == Screenshots ==
 
-1. Total price before cart button for simple product
-2. Sticky bottom right total price for variable product
-3. Grouped product total price demo
-4. Desktop and mobile view comparison for sticky total price
-5. Total price in separate lines
-6. Admin settings page (general section)
-7. Admin settings page (appearence section)
+1. Product total on simple, variable and grouped product pages.
+2. Append additional contents to the total price.
+3. Mobile view comparison.
+4. Admin settings option page.
 
 == Changelog ==
 
-= 3.1.0 2026-09-09 =
+= 3.1.0 2026-09-21 =
 
 **Single product total**
 
-* Update - New total price extra content option added.
+* Update - New additional contents available to append to the total price.
+* Fix - Currency formatting isses fixed.
 
 = 3.0.1 2026-08-02 =
 

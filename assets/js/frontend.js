@@ -8,15 +8,10 @@
 ;(function($, window, document){
 	class SPTotalPrice{
 		constructor(){
-            this.timer = null; // debounce previous event timing.
-            this.delay = parseInt( sptotal_data.delay ) || 1000; // event delay.
-
+            this.timer     = null; // debounce previous event timing.
+            this.delay     = parseInt( sptotal_data.delay ) || 1000; // event delay.
             this.priceWrap = null; // current price wrap.
-            this.total     = 0.0; // total price.
-            // this.qty       = 0; // total product quantities.
-            this.regular   = 0; // regular price.
-
-            this.items = []; // qty - price relation array.
+            this.items     = []; // qty - price relation array.
 
 			$( document ).ready( () => this.initEvents() );
 		}
@@ -45,14 +40,9 @@
             if( ! loader || 0 === loader.length ) {
                 $( document ).find( '.sptotal' ).prepend( '<div class="sptotal-loading"></div>' );
             }
-            // const totalPrice = $( document ).find( '.sptotal-price' );
-            // totalPrice.toggleClass( 'sptotal-disable', isActive );
         }
         browseProductItems(){
             const qtyWraps = $( document ).find( '#content form.cart .quantity .qty, #main-content form.cart .quantity .qty, #main form.cart .quantity .qty, main form.cart .quantity .qty, #brx-content form.cart .quantity .qty' );
-
-            // this.total = 0;
-            // this.qty   = 0;
 
             this.items = []; // reset item states.
 
@@ -86,13 +76,6 @@
                 price: price,
                 rp:    this.extractRegularPrice( this.priceWrap ), // regular price.
             } );
-
-            // this.qty += qty;
-            // this.total = isGrouped ? this.total + ( price * qty ) : price * qty;
-
-            // const regular = this.extractRegularPrice( this.priceWrap );
-            // this.regular  = isGrouped ? this.regular + ( qty * regular ) : qty * regular;
-            // console.log( 'regular', this.regular, 'qty', qty, 'rp', regular );
         }
         getPriceWrap( el, isGrouped ){
             if( isGrouped ) {
@@ -155,7 +138,6 @@
             } ).replace( ',', '%1$s' ).replace( '.', sptotal_data.ds ).replace( '%1$s', sptotal_data.ts );
         }
         appendToPrice(){
-            // console.log( 'items', this.items );
             const format = sptotal_data.settings.price_format;
             if( 0 === format.length || 'none' === format ){
                 return;
@@ -174,30 +156,9 @@
 
             itemVal      = 'percent' === format && itemVal > 0 ? Math.round( ( itemVal * 100 ) / total ).toFixed( 0 ) + '%' : itemVal;
             const target = 'fixed' === format ? sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( itemVal ) ) : itemVal;
-            console.log( 'item value', itemVal, 'total', total );
-            // console.log( 'total 2', total, 'am', itemVal );
 
             let value = 'after' === sptotal_data.ext_position ? `${target} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${target}`;
             $( '.sptotal-price' ).after( `<div class="extra-content total-${format}">${value}</div>` );
-
-
-            // if( 'qty' === format ){
-            //     $( '.sptotal-price' ).after( `<div class="extra-content total-qty">x${qty}</div>` );
-            // }
-            // // else if( 'regular' === format ){
-            // //     let price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( this.regular ) );
-            // //     price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
-            // //     $( '.sptotal-price' ).after( `<div class="extra-content regular-total">${price}</div>` );
-            // // }
-            // else if( 'fixed' === format ){}
-            // else if( 'percent' === format ){
-            //     // let price = this.regular - this.total;
-            //     // if( price > 0 ){
-            //     //     price = sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( price ) );
-            //     //     price = 'after' === sptotal_data.ext_position ? `${price} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${price}`;
-            //     //     $( '.sptotal-price' ).after( `<div class="extra-content total-saved">${price}</div>` );
-            //     // }
-            // }
         }
 
         addToCartHandler(){
@@ -240,8 +201,6 @@
             swatches = swatches && swatches.length > 0 ? swatches : $( document ).find( '.variable-item-contents' ); // Variation swatches | Emran Ahmed.
             swatches = swatches && swatches.length > 0 ? swatches : $( document ).find( '.rtwpvs-term-span' ); // Variation swatches | RadiusTheme.
             swatches = swatches && swatches.length > 0 ? swatches : $( document ).find( '.yith_wccl_value' ); // Variation swatches | Yith.
-
-            // our own Simple Variation Swatches plugin handler.
 
             if( ! swatches || 0 === swatches.length ) {
                 return;
