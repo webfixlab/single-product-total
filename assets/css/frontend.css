@@ -130,6 +130,8 @@
 }
 .sptotal.fixed .extra-content {
 	display: block;
+	border-radius: 5px;
+	margin: 0;
 }
 .sptotal.fixed .extra-content.total-fixed, .sptotal.fixed .extra-content.total-percent{
 	border-radius: 5px;

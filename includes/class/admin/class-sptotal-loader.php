@@ -286,8 +286,10 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 				return;
 			}
 
-			$delay        = get_option( 'sptotal_delay' );
-			$price_format = get_option( 'sptotal_price_format' );
+			$ext_type     = get_option( 'sptotal_price_format' ); // extension type.
+			$ext_label    = get_option( 'sptotal_extra_text' );
+			$ext_label    = ( 'fixed' === $ext_type || 'percent' === $ext_type ) && empty( $ext_label ) ? __( 'Save', 'single-product-total' ) : $ext_label; // only applies to saved amount.
+			$ext_position = get_option( 'sptotal_ext_position' );
 
 			// add localized variables.
 			$data = array(
@@ -296,14 +298,11 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 				'dp'           => get_option( 'woocommerce_price_num_decimals', 2 ), // decimal point.
 				'ds'           => wc_get_price_decimal_separator(), // decimal separator.
 				'ts'           => wc_get_price_thousand_separator(), // thousand separator.
-				'delay'        => $delay,
-				'template'     => wc_price( 99999.99 ),
-				'total_ext'    => get_option( 'sptotal_extra_text' ),
-				'ext_position' => get_option( 'sptotal_ext_position' ),
-				'settings'     => array(
-					'delay'        => empty( $delay ) ? 1000 : $delay,
-					'price_format' => empty( $price_format ) ? 'none' : $price_format,
-				),
+				'delay'        => get_option( 'sptotal_delay' ),
+				'wc_price'     => wc_price( 99999.99 ),
+				'ext_type'     => empty( $ext_type ) ? 'none' : $ext_type,
+				'ext_label'    => $ext_label,
+				'ext_position' => empty( $ext_position ) ? 'before' : $ext_position,
 			);
 			
 			// apply filter.

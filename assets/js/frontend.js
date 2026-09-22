@@ -148,7 +148,7 @@
             } ).replace( ',', '%1$s' ).replace( '.', sptotal_data.ds ).replace( '%1$s', sptotal_data.ts );
         }
         appendToPrice(){
-            const format = sptotal_data.settings.price_format;
+            const format = sptotal_data.ext_type;
             if( 0 === format.length || 'none' === format ){
                 return;
             }
@@ -165,9 +165,9 @@
             }
 
             itemVal      = 'percent' === format && itemVal > 0 ? Math.round( ( itemVal * 100 ) / total ).toFixed( 0 ) + '%' : itemVal;
-            const target = 'fixed' === format ? sptotal_data.template.replace( this.formatNumber( 99999.99 ), this.formatNumber( itemVal ) ) : itemVal;
+            const target = 'fixed' === format ? sptotal_data.wc_price.replace( this.formatNumber( 99999.99 ), this.formatNumber( itemVal ) ) : itemVal;
 
-            let value = 'after' === sptotal_data.ext_position ? `${target} ${sptotal_data.total_ext}` : `${sptotal_data.total_ext} ${target}`;
+            let value = 'after' === sptotal_data.ext_position ? `${target} ${sptotal_data.ext_label}` : `${sptotal_data.ext_label} ${target}`;
             $( '.sptotal-price' ).after( `<div class="extra-content total-${format}">${value}</div>` );
         }
 
@@ -200,7 +200,6 @@
 			$( document ).on( 'click', 'a.reset_variations', () => this.variationEventHandler( 0 ) );
         }
         variationEventHandler( value ){
-            console.log( 'var value', value);
             if( ! value || 0 === value.length || 0 === value ){
                 this.updateTotalPriceHtml( 0 );
             }else{
