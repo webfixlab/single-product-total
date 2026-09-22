@@ -192,6 +192,7 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 					<label><?php $this->render_field( 'sptotal_extra_text' ); ?></label>
 					<label><?php echo esc_html__( 'Position', 'single-product-total' ); ?></label>
 					<?php $this->render_field( 'sptotal_ext_position' ); ?>
+					<p class="description"><?php echo esc_html__( 'Add label to the total price and place it before or after the additional content.', 'single-product-total' ); ?></p>
 				</td>
 			</tr>
 			<tr>

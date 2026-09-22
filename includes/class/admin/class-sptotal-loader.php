@@ -288,8 +288,14 @@ if ( ! class_exists( 'SPTotal_Loader' ) ) {
 
 			$ext_type     = get_option( 'sptotal_price_format' ); // extension type.
 			$ext_label    = get_option( 'sptotal_extra_text' );
-			$ext_label    = ( 'fixed' === $ext_type || 'percent' === $ext_type ) && empty( $ext_label ) ? __( 'Save', 'single-product-total' ) : $ext_label; // only applies to saved amount.
 			$ext_position = get_option( 'sptotal_ext_position' );
+
+			// empty label > empty position.
+			if( empty( $ext_label ) ){
+				$ext_position = 'qty' === $ext_type ? 'after' : $ext_position;
+				$ext_label    = 'qty' === $ext_type ? __( 'Items', 'single-product-total' ) : $ext_label;
+				$ext_label    = 'fixed' === $ext_type || 'percent' === $ext_type ? __( 'Save', 'single-product-total' ) : $ext_label; // only applies to saved amount.
+			}
 
 			// add localized variables.
 			$data = array(

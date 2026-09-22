@@ -132,11 +132,7 @@
 	display: block;
 	border-radius: 5px;
 	margin: 0;
-}
-.sptotal.fixed .extra-content.total-fixed, .sptotal.fixed .extra-content.total-percent{
-	border-radius: 5px;
 	text-align: center;
-	margin: 0;
 }
 @media screen and (max-width: 767px) {
 	.sptotal-cart-btn {

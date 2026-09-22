@@ -164,10 +164,14 @@
                 return;
             }
 
+            // process before item value changes.
+            let label = sptotal_data.ext_label;
+            label = 'qty' === format && 1 === itemVal && 'Items' === label ? 'Item' : label;
+
             itemVal      = 'percent' === format && itemVal > 0 ? Math.round( ( itemVal * 100 ) / total ).toFixed( 0 ) + '%' : itemVal;
             const target = 'fixed' === format ? sptotal_data.wc_price.replace( this.formatNumber( 99999.99 ), this.formatNumber( itemVal ) ) : itemVal;
 
-            let value = 'after' === sptotal_data.ext_position ? `${target} ${sptotal_data.ext_label}` : `${sptotal_data.ext_label} ${target}`;
+            let value = 'after' === sptotal_data.ext_position ? `${target} ${label}` : `${label} ${target}`;
             $( '.sptotal-price' ).after( `<div class="extra-content total-${format}">${value}</div>` );
         }
 
