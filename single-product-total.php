@@ -7,7 +7,7 @@
  * Author URI:           https://webfixlab.com/
  * Version:              3.1.0
  * Requires at least:    4.9
- * Tested up to:         7.1.1
+ * Tested up to:         7.1.2
  * Requires PHP:         7.0
  * Tags:                 woocommerce product total,single product total,product total
  * WC requires at least: 3.6

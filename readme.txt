@@ -2,7 +2,7 @@
 Contributors: webfixlab, aikya, smshahriar
 Tags: woocommerce product total, single product total, product total
 Requires at least: 4.9
-Tested up to: 7.1.1
+Tested up to: 7.1.2
 Stable tag: 3.1.0
 Requires PHP: 7.0
 WC requires at least: 3.6

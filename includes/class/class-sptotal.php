@@ -52,15 +52,15 @@ if ( ! class_exists( 'SPTotal' ) ) {
 		 * Init hook
 		 */
 		public function init() {
-			if ( 'after_cart_btn' === $this->settings['position'] ) {
-				add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'display_total' ) );
-			} elseif ( 'before_cart_btn' === $this->settings['position'] ) {
-				add_action( 'woocommerce_before_add_to_cart_button', array( $this, 'display_total' ) );
-			} else {
+			if( false !== strpos( $this->settings['position'], 'fixed' ) ){
 				add_action( 'wp_footer', array( $this, 'display_total' ) );
+			} elseif( 'after_cart_btn' === $this->settings['position'] ){
+				add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'display_total' ) );
+			}else{
+				add_action( 'woocommerce_before_add_to_cart_button', array( $this, 'display_total' ) );
 			}
 		}
-		
+
 		/**
 		 * Display total price
 		 */
