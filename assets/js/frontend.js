@@ -62,16 +62,19 @@
         updateProductTotal( el, isGrouped ){
             this.priceWrap = this.getPriceWrap( el, isGrouped );
             if( ! this.priceWrap || 0 === this.priceWrap.length ) {
+                // console.log( 'on price wrap issue' );
                 return;
             }
 
             const price = this.extractPriceFromHtml( this.priceWrap );
             const qty   = parseInt( el.val() );
             if( 0 === price || isNaN( qty ) || ! qty || 0 === qty ){
+                // console.log( 'no qty issue' );
                 return;
             }
 
             if( ! this.hasVariation() ){
+                // console.log( 'variation issue' );
                 return;
             }
 
@@ -80,6 +83,7 @@
                 price: price,
                 rp:    this.extractRegularPrice( this.priceWrap ), // regular price.
             } );
+            // console.log( 'items', this.items );
         }
         getPriceWrap( el, isGrouped ){
             if( isGrouped ) {
@@ -135,10 +139,14 @@
             const total = this.items && this.items.length > 0 ? Object.values( this.items ).reduce( ( sum, item ) => {
                 return sum + item.qty * item.price;
             }, 0 ) : 0;
+            // console.log( 'items', this.items, 'sum', total, 'override', typeof override, override, 'final', this.formatNumber( 'number' === typeof override ? override : total ) );
 
             $( '.sptotal-price bdi' ).contents().filter( function(){
                 return this.nodeType === 3;
             } ).first().replaceWith( this.formatNumber( 'number' === typeof override ? override : total ) );
+            console.log( 'elm', $( '.sptotal-price bdi' ).contents().filter( function(){
+                return this.nodeType === 3;
+            } ).first() );
         }
         formatNumber( price ){
             return parseFloat( price ).toLocaleString( sptotal_data.locale, {

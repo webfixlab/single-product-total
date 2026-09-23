@@ -42,8 +42,6 @@ $sptotal__['fields'] = array(
 		'options' => array(
 			'before_cart_btn'    => __( 'Before add to cart button', 'single-pruduct-total' ),
 			'after_cart_btn'     => __( 'After add to cart button', 'single-pruduct-total' ),
-			'before_price'       => __( 'Before price', 'single-pruduct-total' ),
-			'after_price'        => __( 'After price', 'single-pruduct-total' ),
 			'fixed_bottom_right' => __( 'Fixed bottom right', 'single-pruduct-total' ),
 			'fixed_bottom_left'  => __( 'Fixed bottom left', 'single-pruduct-total' ),
 			'fixed_top_right'    => __( 'Fixed top right', 'single-pruduct-total' ),
@@ -83,7 +81,7 @@ $sptotal__['fields'] = array(
 	),
 	'sptotal_delay'          => array(
 		'type'        => 'text',
-		'label'       => __( 'Loader delay in mili-seconds', 'single-pruduct-total' ),
+		'label'       => __( 'Loader delay in milliseconds', 'single-pruduct-total' ),
 		'placeholder' => __( '1000', 'single-pruduct-total' ),
 	),
 	'sptotal_cart_btn'       => array(

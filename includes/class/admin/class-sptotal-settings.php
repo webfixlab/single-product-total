@@ -256,8 +256,7 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 			$data = $sptotal__['fields'][ $name ];
 
 			if ( 'text' === $data['type'] ) {
-				$value = get_option( $name );
-				printf( '<input type="%s" name="%s" placeholder="%s" value="%s">', esc_attr( $data['type'] ), esc_attr( $name ), esc_html( $data['placeholder'] ), esc_html( $value ) );
+				$this->render_field_text( $name );
 			} elseif ( 'select' === $data['type'] ) {
 				if ( ! isset( $data['options'] ) ) {
 					return;
@@ -279,6 +278,20 @@ if ( ! class_exists( 'SPTotal_Settings' ) ) {
 				</select>
 				<?php
 			}
+		}
+
+		public function render_field_text( $name ){
+			global $sptotal__;
+
+			$value = get_option( $name );
+			$field = $sptotal__['fields'][ $name ];
+			?>
+			<input
+				type="<?php echo esc_attr( $field['type'] ); ?>"
+				name="<?php echo esc_attr( $name ); ?>"
+				placeholder="<?php echo isset( $field['placeholder'] ) ? esc_html( $field['placeholder'] ) : ''; ?>"
+				value="<?php echo esc_html( $value ); ?>">
+			<?php
 		}
 
 		/**

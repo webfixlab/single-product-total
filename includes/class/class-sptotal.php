@@ -52,11 +52,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 		 * Init hook
 		 */
 		public function init() {
-			if ( 'before_price' === $this->settings['position'] ) {
-				add_filter( 'render_block_core/post-title', array( $this, 'total_before_price' ), 10, 9 );
-			} elseif ( 'after_price' === $this->settings['position'] ) {
-				add_action( 'woocommerce_single_product_summary', array( $this, 'display_total' ), 11 );
-			} elseif ( 'after_cart_btn' === $this->settings['position'] ) {
+			if ( 'after_cart_btn' === $this->settings['position'] ) {
 				add_action( 'woocommerce_after_add_to_cart_button', array( $this, 'display_total' ) );
 			} elseif ( 'before_cart_btn' === $this->settings['position'] ) {
 				add_action( 'woocommerce_before_add_to_cart_button', array( $this, 'display_total' ) );
@@ -64,24 +60,7 @@ if ( ! class_exists( 'SPTotal' ) ) {
 				add_action( 'wp_footer', array( $this, 'display_total' ) );
 			}
 		}
-
-		/**
-		 * Display total price before product price.
-		 */
-		public function total_before_price( $block_content, $block, $instance ) {
-			$namespace              = $instance->attributes['__woocommerceNamespace'] ?? '';
-			$is_product_title_block = 'woocommerce/product-collection/product-title' === $namespace;
-			if ( $is_product_title_block ) {
-				return $block_content;
-			}
-
-			ob_start();
-			$this->display_total();
-			$block_content .= ob_get_contents();
-
-			return $block_content;
-		}
-
+		
 		/**
 		 * Display total price
 		 */

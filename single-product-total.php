@@ -11,7 +11,7 @@
  * Requires PHP:         7.0
  * Tags:                 woocommerce product total,single product total,product total
  * WC requires at least: 3.6
- * WC tested up to:      11.1.1
+ * WC tested up to:      11.1.2
  * License:              GPL2
  * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
  * Requires Plugins:     woocommerce

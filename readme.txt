@@ -6,7 +6,7 @@ Tested up to: 7.1.1
 Stable tag: 3.1.0
 Requires PHP: 7.0
 WC requires at least: 3.6
-WC tested up to: 11.1.1
+WC tested up to: 11.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,14 +80,16 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 
 == Changelog ==
 
-= 3.1.0 2026-09-21 =
+= 3.1.0 2026-09-23 =
 
 **Single product total**
 
 * Update - New additional contents available to append to the total price.
+* Update - Removed total price position before and after product price.
 * Fix - Currency formatting isses fixed.
 * Fix - Variable product price issue when variation isn't found.
 * Update - Added empty price extension validation.
+* Fix - Total price not working on "before" and "after" product price positions.
 
 = 3.0.1 2026-08-02 =
 
