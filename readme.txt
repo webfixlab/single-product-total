@@ -14,9 +14,9 @@ Quickest and lightest way to show total price on product pages. A simple step fo
 
 == Description ==
 
-With our plugin, you can easily display the total price on the product page. This will help your customers to quickly understand the cost of the product they're interested in, based on the quantity they need.
+Display total price directly to the product pages. No time wasted calculating the total amount. With new additional contents like saved amount option right next to the total price will help customers make any product look attractive and lucrative.
 
-The plugin supports single, variable and grouped products. It also offers extensive styling options to match your store’s design. With the **animation duration** feature, you can adjust price calculation time and with enough time, it will automatically handle **Discount plugins**.
+Works for single, variable and grouped products. It also offers extensive styling options to match your store’s design. With the **animation duration** feature, you can adjust price calculation time and with enough time, it will automatically handle **Discount plugins**.
 
 Additionally, an add to cart button can be placed in fixed positions, such as the bottom right of the page, for improved usability.
 
@@ -24,14 +24,19 @@ Additionally, an add to cart button can be placed in fixed positions, such as th
 
 == FEATURES ==
 
-* New! Additional contents available to append to the total price.
-* Improved **currency and price formats** support.
-* **8 different positions** to display total price with **4 sticky position**
-* Animation duration option to add time for **dynamic discount plugins**.
-* Extra **Add to cart button** on sticky positions.
-* Supports Single, Variable and **Grouped products**.
-* **Discount Rules and Dynamic Pricing for WooCommerce** support.
-* Easy design customization options.
+* Works on simple, variable and grouped product.
+* Option to place it with add to cart and fix it at the corner.
+* Works with any price && currency formats.
+* Add additional contents like total **Saved amound or percentage, quantity** to total price.
+* Works seamlessly with all **major themes and page builders**.
+* Supports **Discount rules and dynamic product pricing** plugins.
+* Easy styling options like price color or background.
+* **Quick add to cart** button lets customers buy it directly from the fixed total price section.
+* offers advanced feature like animation duration which created delay to **include custom product discount**.
+* Auto additional content labels like 'Items' for quantity and 'Save' for saved total amount.
+* Single line price and label or multiple line option.
+* Multiple additional content position option, like "Save $18", "$20 Saved", "9 Items" etc.
+* Change total price label and fixed add to cart button label.
 
 == BENEFITS ==
 
@@ -89,7 +94,6 @@ Yes, just send your [request here](https://webfixlab.com/request-quote/).
 * Fix - Currency formatting isses fixed.
 * Fix - Variable product price issue when variation isn't found.
 * Update - Added empty price extension validation.
-* Fix - Total price not working on "before" and "after" product price positions.
 
 = 3.0.1 2026-08-02 =
 
